@@ -3,40 +3,33 @@ import re
 import json
 import streamlit as st
 import pandas as pd
-from google import genai
-from google.genai import types
+from dotenv import load_dotenv
+from groq import Groq
 from matcher import match_jobs
 
-# ── Gemini client ─────────────────────────────────────────────────────────────
-# Reads GEMINI_API_KEY from your environment.
-# Get a free key at: https://aistudio.google.com
-# Set it before running:
-#   Mac/Linux:  export GEMINI_API_KEY="AIza..."
-#   Windows:    $env:GEMINI_API_KEY = "AIza..."
-#
-# Free tier limits (no credit card needed):
-#   - 1,500 requests per day
-#   - 1,000,000 tokens per minute
-#   - Completely free forever on gemini-2.0-flash
+load_dotenv()
 
-MODEL = "gemini-2.0-flash"
+# ── Groq client ─────────────────────────────────────────────────────────────
+# Reads GROQ_API_KEY from your environment.
+# Get a free key at: https://console.groq.com/keys
+
+MODEL = "llama-3.3-70b-versatile"
 
 
 def _get_client():
     """
-    Create the Gemini client lazily — only when the user actually opens the
-    chat tab. This way a missing API key doesn't crash the whole app on startup.
+    Create the Groq client lazily.
     """
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         try:
-            api_key = st.secrets.get("GEMINI_API_KEY", "")
+            api_key = st.secrets.get("GROQ_API_KEY", "")
         except Exception:
             api_key = ""
             
     if not api_key:
         return None
-    return genai.Client(api_key=api_key)
+    return Groq(api_key=api_key)
 
 
 def _build_system_prompt(df: pd.DataFrame) -> str:
@@ -212,28 +205,22 @@ def render_chat(df: pd.DataFrame):
     # ── API key check ─────────────────────────────────────────────────────────
     if client is None:
         st.warning(
-            "**GEMINI_API_KEY not set.**\n\n"
-            "1. Get a free key at [aistudio.google.com](https://aistudio.google.com) — no credit card needed\n"
-            "2. In your terminal, run: `export GEMINI_API_KEY=\"AIza...\"`\n"
+            "**GROQ_API_KEY not set.**\n\n"
+            "1. Get a free key at [console.groq.com/keys](https://console.groq.com/keys) — no credit card needed\n"
+            "2. Ensure you have added GROQ_API_KEY to your `.env` file\n"
             "3. Restart Streamlit"
         )
         return
 
-    # ── Replay chat history ───────────────────────────────────────────────────
-    for msg in st.session_state.chat_history:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
-            if msg.get("match_results") is not None:
-                _render_match_results(msg["match_results"])
-
     # ── User input ────────────────────────────────────────────────────────────
     user_input = st.chat_input("Ask about IT jobs in the Philippines…")
+    
+    premeditated = st.session_state.pop("gemini_trigger", None)
+    if premeditated:
+        user_input = premeditated
 
     if user_input:
-        with st.chat_message("user"):
-            st.markdown(user_input)
-
-        # Add to both history lists
+        # Add to both history lists immediately
         st.session_state.chat_history.append({
             "role": "user",
             "content": user_input,
@@ -241,57 +228,67 @@ def render_chat(df: pd.DataFrame):
         })
         st.session_state.gemini_history.append({
             "role": "user",
-            "parts": [{"text": user_input}],
+            "content": user_input,
         })
 
-        # ── Call Gemini API ───────────────────────────────────────────────────
-        # Key difference from Anthropic: Gemini takes system_instruction
-        # separately from the conversation contents.
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking…"):
+        # ── Call Groq API ───────────────────────────────────────────────────
+        error_happened = False
+        raw_reply = ""
+        
+        with st.spinner("Thinking…"):
+            import time
+            max_retries = 3
+            for attempt in range(max_retries):
                 try:
-                    response = client.models.generate_content(
+                    # Prepend the system prompt at the very beginning of the messages list
+                    api_messages = [{"role": "system", "content": st.session_state.system_prompt}] + st.session_state.gemini_history
+
+                    response = client.chat.completions.create(
                         model=MODEL,
-                        contents=st.session_state.gemini_history,
-                        config=types.GenerateContentConfig(
-                            system_instruction=st.session_state.system_prompt,
-                            max_output_tokens=1024,
-                            temperature=0.3,   # lower = more factual, less creative
-                        ),
+                        messages=api_messages,
+                        max_tokens=1024,
+                        temperature=0.3,
                     )
-                    raw_reply = response.text
-
+                    raw_reply = response.choices[0].message.content
+                    break
                 except Exception as e:
-                    raw_reply = (
-                        f"Sorry, something went wrong: `{e}`\n\n"
-                        "Check that your GEMINI_API_KEY is valid and you have internet access."
-                    )
+                    error_str = str(e)
+                    if ("503" in error_str or "429" in error_str) and attempt < max_retries - 1:
+                        time.sleep(2 * (attempt + 1))  # Delay 2s, then 4s, to wait out high demand
+                        continue
+                    
+                    error_happened = True
+                    raw_reply = f"The AI is experiencing high demand or rate limits: `{e}`"
+                    break
 
-        # ── Parse and display ─────────────────────────────────────────────────
+        if error_happened:
+            st.error(raw_reply)
+            # Remove the user's message from history so they can retry without breaking context
+            st.session_state.chat_history.pop()
+            st.session_state.gemini_history.pop()
+            st.stop()
+
+        # ── Parse and match ─────────────────────────────────────────────────
         match_params   = _parse_match_command(raw_reply)
         clean_reply    = _clean_response(raw_reply)
         match_results_df = None
 
-        with st.chat_message("assistant"):
-            st.markdown(clean_reply)
-
-            if match_params:
-                with st.spinner("Running job matcher…"):
-                    try:
-                        match_results_df = match_jobs(
-                            df=df,
-                            skill_query=match_params.get("skill_query", ""),
-                            level=match_params.get("level", []),
-                            mode=match_params.get("mode", []),
-                            job_type=match_params.get("job_type", []),
-                            exp_years=float(match_params.get("exp_years", 3)),
-                            salary_min=float(match_params.get("salary_min", 0)),
-                            salary_max=float(match_params.get("salary_max", 500_000)),
-                            top_n=int(match_params.get("top_n", 5)),
-                        )
-                        _render_match_results(match_results_df)
-                    except Exception as e:
-                        st.warning(f"Matcher error: {e}")
+        if match_params:
+            with st.spinner("Running job matcher…"):
+                try:
+                    match_results_df = match_jobs(
+                        df=df,
+                        skill_query=match_params.get("skill_query", ""),
+                        level=match_params.get("level", []),
+                        mode=match_params.get("mode", []),
+                        job_type=match_params.get("job_type", []),
+                        exp_years=float(match_params.get("exp_years", 3)),
+                        salary_min=float(match_params.get("salary_min", 0)),
+                        salary_max=float(match_params.get("salary_max", 500_000)),
+                        top_n=int(match_params.get("top_n", 5)),
+                    )
+                except Exception as e:
+                    st.warning(f"Matcher error: {e}")
 
         # Store in display history
         st.session_state.chat_history.append({
@@ -300,8 +297,15 @@ def render_chat(df: pd.DataFrame):
             "match_results": match_results_df,
         })
 
-        # Store in Gemini history (API format — no match_results here)
+        # Store in Groq history
         st.session_state.gemini_history.append({
-            "role": "model",   # Gemini uses "model" not "assistant"
-            "parts": [{"text": raw_reply}],
+            "role": "assistant",
+            "content": raw_reply,
         })
+
+    # ── Replay chat history (Reversed) ────────────────────────────────────────
+    for msg in reversed(st.session_state.chat_history):
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+            if msg.get("match_results") is not None:
+                _render_match_results(msg["match_results"])

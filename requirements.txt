@@ -3,3 +3,9 @@ pandas
 plotly
 scikit-learn
 numpy
+flask
+flask-jwt-extended
+flask-cors
+bcrypt
+python-dotenv
+cryptography

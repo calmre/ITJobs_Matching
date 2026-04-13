@@ -1,5 +1,6 @@
 import requests
 import streamlit as st
+import re
 
 # ── Flask API config ──────────────────────────────────────────────────────────
 # This is the address of your Flask server (flask_api.py).
@@ -128,60 +129,87 @@ def login_screen():
             # ── LOGIN TAB ─────────────────────────────────────────────────────
             with tab_login:
                 st.markdown("#### Account login")
-                username = st.text_input("Username", placeholder="admin", key="login_user")
-                password = st.text_input("Password", type="password", placeholder="••••••••", key="login_pass")
+                with st.form("login_form", clear_on_submit=False):
+                    username = st.text_input("Username", placeholder="admin")
+                    password = st.text_input("Password", type="password", placeholder="••••••••")
+                    
+                    submitted = st.form_submit_button("Log in", use_container_width=True)
 
                 if st.session_state.login_error:
                     st.error(st.session_state.login_error)
 
-                if st.button("Log in", use_container_width=True):
-                    with st.spinner("Logging in..."):
-                        data, code = _api_call(
-                            "POST", "/auth/login",
-                            json={"username": username, "password": password}
-                        )
+                if submitted:
+                    if not username.strip() or not password.strip():
+                        st.error("Please enter both username and password.")
+                    else:
+                        with st.spinner("Logging in..."):
+                            data, code = _api_call(
+                                "POST", "/auth/login",
+                                json={"username": username, "password": password}
+                            )
 
-                        if code == 200:
-                            # Store the JWT token — this is what future requests use
-                            st.session_state.jwt_token = data["token"]
-                            st.session_state.role = data["role"]
-                            st.session_state.username = data["username"]
-                            st.session_state.login_error = ""
-                            if data.get("role") == "admin":
-                                st.success("Logged in successfully as admin. Redirecting...")
+                            if code == 200:
+                                # Store the JWT token — this is what future requests use
+                                st.session_state.jwt_token = data["token"]
+                                st.session_state.role = data["role"]
+                                st.session_state.username = data["username"]
+                                st.session_state.login_error = ""
+                                if data.get("role") == "admin":
+                                    st.success("Logged in successfully as admin. Redirecting...")
+                                else:
+                                    st.success("Logged in successfully. Redirecting...")
+                                import time; time.sleep(0.5)
+                                st.rerun()
                             else:
-                                st.success("Logged in successfully. Redirecting...")
-                            st.rerun()
-                        else:
-                            st.session_state.login_error = data.get("error", "Login failed. Please check your username and password.")
-                            st.rerun()
+                                st.session_state.login_error = data.get("error", "Login failed. Please check your username and password.")
+                                import time; time.sleep(0.5)
+                                st.rerun()
 
             # ── REGISTER TAB ──────────────────────────────────────────────────
             with tab_register:
                 st.markdown("#### Register")
-                new_username = st.text_input("New username", key="reg_user")
-                new_password = st.text_input("New password", type="password", key="reg_pass")
-                confirm_password = st.text_input("Confirm password", type="password", key="reg_conf")
+                with st.form("register_form", clear_on_submit=True):
+                    new_username = st.text_input("New username")
+                    new_password = st.text_input("New password", type="password")
+                    confirm_password = st.text_input("Confirm password", type="password")
 
-                if st.button("Create account", use_container_width=True, type="primary"):
-                    if new_password != confirm_password:
+                    reg_submitted = st.form_submit_button("Create account", use_container_width=True, type="primary")
+
+                if reg_submitted:
+                    new_username_clean = new_username.strip()
+                    
+                    if not new_username_clean or not new_password:
+                        st.error("Please fill out all fields.")
+                    elif len(new_username_clean) < 3:
+                        st.warning("Username must be at least 3 characters long.")
+                    elif not new_username_clean.isalnum():
+                        st.warning("Username can only contain letters and numbers.")
+                    elif len(new_password) < 8:
+                        st.warning("Password must be at least 8 characters long.")
+                    elif not re.search(r"\d", new_password):
+                        st.warning("Password must contain at least one number.")
+                    elif not re.search(r"[a-zA-Z]", new_password):
+                        st.warning("Password must contain at least one letter.")
+                    elif new_password != confirm_password:
                         st.error("Passwords do not match.")
                     else:
-                        data, code = _api_call(
-                            "POST", "/auth/register",
-                            json={"username": new_username, "password": new_password}
-                        )
+                        with st.spinner("Creating account..."):
+                            data, code = _api_call(
+                                "POST", "/auth/register",
+                                json={"username": new_username_clean, "password": new_password}
+                            )
 
-                        if code == 201:
-                            # Auto-login after registration
-                            st.session_state.jwt_token = data["token"]
-                            st.session_state.role = data["role"]
-                            st.session_state.username = data["username"]
-                            st.session_state.login_error = ""
-                            st.success(data.get("message", "Account created!"))
-                            st.rerun()
-                        else:
-                            st.error(data.get("error", "Registration failed."))
+                            if code == 201:
+                                # Auto-login after registration
+                                st.session_state.jwt_token = data["token"]
+                                st.session_state.role = data["role"]
+                                st.session_state.username = data["username"]
+                                st.session_state.login_error = ""
+                                st.success(data.get("message", "Account created!"))
+                                import time; time.sleep(0.5)
+                                st.rerun()
+                            else:
+                                st.error(data.get("error", "Registration failed."))
 
     return False
 

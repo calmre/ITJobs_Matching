@@ -1,4 +1,7 @@
 ﻿import os
+from dotenv import load_dotenv
+load_dotenv()
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -55,8 +58,8 @@ st.markdown(f"""
     .score-medium {{ background: #fdf6b2; color: #723b13; }}
     .score-low    {{ background: #fde8e8; color: #9b1c1c; }}
     h1, h2, h3 {{ font-family: "Inter", sans-serif; font-weight: 600; color: inherit; }}
-    .stTabs [data-baseweb="tab-list"] {{ gap: 2rem; }}
-    .stTabs [data-baseweb="tab"] {{ height: 3rem; background-color: transparent; }}
+    .stTabs [data-baseweb="tab-list"] {{ gap: 2.5rem; }}
+    .stTabs [data-baseweb="tab"] {{ height: 3.5rem; font-size: 1.1rem; font-weight: 600; background-color: transparent; }}
     [data-testid="stChatInput"] textarea {{ font-size: 0.95rem; }}
 </style>
 """, unsafe_allow_html=True)
@@ -98,6 +101,9 @@ with col_logout:
     else:
         if st.button("Log out", use_container_width=True):
             logout()
+
+# Separator for the header
+st.divider()
 
 # ── Theme toggle handler ───────────────────────────────────────────────────────
 if theme_toggle != current_is_dark:
@@ -340,18 +346,15 @@ with tab_chat:
     col_s1, col_s2, col_s3 = st.columns(3)
     with col_s1:
         if st.button("What's the average salary for a Senior Python developer?", use_container_width=True):
-            st.session_state.setdefault("chat_history", [])
-            st.session_state.chat_history.append({"role": "user", "content": "What's the average salary for a Senior Python developer?"})
+            st.session_state.gemini_trigger = "What's the average salary for a Senior Python developer?"
             st.rerun()
     with col_s2:
         if st.button("Find me remote jobs for someone with 3 years of Java experience", use_container_width=True):
-            st.session_state.setdefault("chat_history", [])
-            st.session_state.chat_history.append({"role": "user", "content": "Find me remote jobs for someone with 3 years of Java experience"})
+            st.session_state.gemini_trigger = "Find me remote jobs for someone with 3 years of Java experience"
             st.rerun()
     with col_s3:
         if st.button("Which IT specialisations are most in demand?", use_container_width=True):
-            st.session_state.setdefault("chat_history", [])
-            st.session_state.chat_history.append({"role": "user", "content": "Which IT specialisations are most in demand?"})
+            st.session_state.gemini_trigger = "Which IT specialisations are most in demand?"
             st.rerun()
 
     st.divider()
