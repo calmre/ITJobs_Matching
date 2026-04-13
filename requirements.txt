@@ -10,3 +10,4 @@ bcrypt
 python-dotenv
 cryptography
 groq
+gunicorn
