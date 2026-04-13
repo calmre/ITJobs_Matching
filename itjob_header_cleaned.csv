@@ -1,0 +1,526 @@
+jobid,level,tech_specialisation,country,salary_from,salary_to,type,mode,work_experience_years,education_level
+2589,Junior,IT Support,Philippines,30000.0,35000.0,Full time,Remote,1.0,Associate Degree
+16604,Junior,Help Desk,Philippines,24500.0,28500.0,Full time,Office,0.0,Associate Degree
+26936,Junior,Financial Services,Philippines,23000.0,26000.0,Full time,Hybrid,0.0,Associate Degree
+30775,Junior,SAAS,Philippines,50000.0,60000.0,Full time,Hybrid,2.0,Associate Degree
+25404,Senior,Microsoft Dynamics 365 CRM,Philippines,60000.0,70000.0,Full time,Hybrid,3.0,Bachelor Degree
+18,Senior,Full Stack,Philippines,60000.0,60000.0,Full time,Hybrid,4.0,Bachelor Degree
+374,Middle,IT,Philippines,35000.0,47000.0,Full time,Office,5.0,Bachelor Degree
+386,Middle,.NET,Philippines,100000.0,120000.0,Full time,Hybrid,3.0,Bachelor Degree
+494,Senior,UNIX,Philippines,60000.0,80000.0,Contract/Temp,Hybrid,2.0,Bachelor Degree
+499,Middle,ERP,Philippines,30000.0,50000.0,Full time,Office,2.0,Bachelor Degree
+529,Senior,HubSpot,Philippines,90000.0,100000.0,Full time,Remote,2.0,Bachelor Degree
+610,Middle,IT Project Management,Philippines,100000.0,130000.0,Full time,Hybrid,3.0,Bachelor Degree
+876,Middle,Project Management,Philippines,35000.0,45000.0,Full time,Office,3.0,Bachelor Degree
+921,Middle,Game Development,Philippines,850.0,850.0,Part time,Remote,4.0,Bachelor Degree
+931,Senior,SAP FICO,Philippines,80000.0,100000.0,Full time,Hybrid,4.0,Bachelor Degree
+1134,Middle,Project Management,Philippines,50000.0,60000.0,Full time,Office,5.0,Bachelor Degree
+1218,Lead,.NET,Philippines,150000.0,190000.0,Full time,Hybrid,10.0,Bachelor Degree
+1263,Lead,SailPoint,Philippines,70000.0,80000.0,Full time,Hybrid,3.0,Bachelor Degree
+1567,Senior,Business Analytics,Philippines,140000.0,160000.0,Full time,Hybrid,5.0,Bachelor Degree
+1746,Middle,Flutter,Philippines,90000.0,120000.0,Full time,Hybrid,2.0,Bachelor Degree
+1810,Senior,Technical Writing,Philippines,65000.0,85000.0,Full time,Remote,5.0,Bachelor Degree
+2480,Middle,ITIL,Philippines,70000.0,100000.0,Full time,Office,3.0,Bachelor Degree
+2592,Middle,ITSM,Philippines,70000.0,100000.0,Full time,Hybrid,7.0,Bachelor Degree
+2787,Middle,Full Stack,Philippines,80000.0,100000.0,Full time,Office,4.0,Bachelor Degree
+2789,Middle,SQL,Philippines,60000.0,70000.0,Full time,Hybrid,5.0,Bachelor Degree
+2882,Middle,Project Management,Philippines,160000.0,176000.0,Full time,Remote,3.0,Bachelor Degree
+2915,Middle,C#,Philippines,45000.0,65000.0,Full time,Office,3.0,Bachelor Degree
+3359,Junior,IT Service Management,Philippines,46000.0,65000.0,Full Time,Hybrid,2.0,Bachelor Degree
+3366,Junior,IT Service Desk,Philippines,29000.0,31000.0,Full time,Remote,2.0,Bachelor Degree
+3425,Middle,SAP B1,Philippines,45000.0,48000.0,Full time,Office,2.0,Bachelor Degree
+3618,Middle,Business Intelligence,Philippines,60000.0,65000.0,Full time,Remote,5.0,Bachelor Degree
+3884,Middle,Data Engineering,Philippines,50000.0,60000.0,Contract/Temp,Hybrid,4.0,Bachelor Degree
+3914,Middle,Java,Philippines,55000.0,80000.0,Contract/Temp,Hybrid,3.0,Bachelor Degree
+3998,Middle,IT Service Management,Philippines,70000.0,100000.0,Full time,Hybrid,7.0,Bachelor Degree
+4002,Junior,Networks,Philippines,25000.0,30000.0,Full time,Office,1.0,Bachelor Degree
+4066,Middle,Java,Philippines,60000.0,80000.0,Contract/Temp,Hybrid,3.0,Bachelor Degree
+4152,Senior,IT Management,Philippines,80000.0,100000.0,Full time,Office,4.0,Bachelor Degree
+4190,Senior,Java,Philippines,150000.0,200000.0,Full time,Remote,5.0,Bachelor Degree
+4198,Senior,Azure,Philippines,90000.0,100000.0,Full time,Office,7.0,Bachelor Degree
+4224,Middle,Workday,Philippines,90000.0,120000.0,Full time,Remote,5.0,Bachelor Degree
+4300,Middle,Data Analysis,Philippines,30000.0,45000.0,Full time,Hybrid,1.0,Bachelor Degree
+4390,Senior,ReactJS,Philippines,115000.0,130000.0,Full time,Hybrid,5.0,Bachelor Degree
+4424,Middle,Technical Support,Philippines,80000.0,100000.0,Full time,Remote,4.0,Bachelor Degree
+4812,Senior,Technical Writing,Philippines,160000.0,246000.0,Full time,Office,8.0,Bachelor Degree
+5188,Middle,Cisco,Philippines,80000.0,110000.0,Full time,Hybrid,2.0,Bachelor Degree
+5245,Middle,CyberSecurity,Philippines,50000.0,75000.0,Full time,Hybrid,5.0,Bachelor Degree
+5380,Lead,Software Development,Philippines,80000.0,100000.0,Full time,Office,8.0,Bachelor Degree
+5728,Middle,Java,Philippines,100000.0,150000.0,Full time,Office,5.0,Bachelor Degree
+5745,Middle,.NET,Philippines,35000.0,50000.0,Full time,Office,4.0,Bachelor Degree
+6077,Senior,Full Stack Development,Philippines,80000.0,120000.0,Full time,Remote,5.0,Bachelor Degree
+6642,Senior,Software Development,Philippines,130000.0,195000.0,Full time,Remote,5.0,Bachelor Degree
+6693,Middle,Azure,Philippines,108000.0,140000.0,Full time,Hybrid,4.0,Bachelor Degree
+6858,Middle,Data Governance,Philippines,100000.0,140000.0,Full time,Hybrid,3.0,Bachelor Degree
+6978,Middle,Project Management,Philippines,35000.0,45000.0,Full time,Hybrid,2.0,Bachelor Degree
+7039,Senior,ERP & MES,Philippines,100000.0,150000.0,Full time,Office,10.0,Bachelor Degree
+7307,Middle,Web Development,Philippines,70000.0,100000.0,Full time,Hybrid,2.0,Bachelor Degree
+7513,Middle,Project Management,Philippines,75000.0,85000.0,Full time,Office,4.0,Bachelor Degree
+7562,Middle,AWS,Philippines,50000.0,85000.0,Full time,Remote,4.0,Bachelor Degree
+7581,Middle,Python,Philippines,30000.0,85000.0,Full time,Remote,1.0,Bachelor Degree
+7686,Senior,ASP.NET,Philippines,125000.0,145000.0,Full time,Remote,5.0,Bachelor Degree
+8302,Middle,IT Asset Management,Philippines,100000.0,150000.0,Full time,Hybrid,5.0,Bachelor Degree
+8313,Senior,SAP FICO,Philippines,90000.0,120000.0,Full time,Hybrid,3.0,Bachelor Degree
+8490,Senior,Python,Philippines,140000.0,200000.0,Full time,Remote,8.0,Bachelor Degree
+8625,Middle,Azure,Philippines,108000.0,140000.0,Full time,Hybrid,4.0,Bachelor Degree
+8646,Senior,Project Management,Philippines,100000.0,120000.0,Contract/Temp,Hybrid,5.0,Bachelor Degree
+8705,Senior,IT Service Management,Philippines,100000.0,120000.0,Contract/Temp,Hybrid,5.0,Bachelor Degree
+8754,Middle,Crystal Reports,Philippines,100000.0,150000.0,Contract/Temp,Hybrid,7.0,Bachelor Degree
+8849,Middle,SAP,Philippines,50000.0,75000.0,Full time,Hybrid,3.0,Bachelor Degree
+8858,Junior,Laboratory Equipment Support,Philippines,25000.0,30000.0,Full time,Office,1.0,Bachelor Degree
+8912,Junior,Database Development & Administration,Philippines,15000.0,23000.0,Full time,Office,1.0,Bachelor Degree
+8927,Middle,Web Development,Philippines,50000.0,70000.0,Contract/Temp,Remote,4.0,Bachelor Degree
+8972,Senior,Business Analysis,Philippines,37000.0,55000.0,Full time,Hybrid,5.0,Bachelor Degree
+9466,Middle,Project Management,Philippines,100000.0,150000.0,Full time,Hybrid,4.0,Bachelor Degree
+9536,Middle,Change Management,Philippines,110000.0,160000.0,Full time,Hybrid,5.0,Bachelor Degree
+9618,Middle,Frontend,Philippines,55700.0,70000.0,Full time,Remote,3.0,Bachelor Degree
+10092,Junior,IT Support,Philippines,20000.0,20000.0,Full time,Hybrid,1.0,Bachelor Degree
+10118,Junior,IT Support,Philippines,25000.0,35000.0,Full time,Office,2.0,Bachelor Degree
+10223,Junior,IT Support,Philippines,15000.0,18000.0,Full time,Office,1.0,Bachelor Degree
+10246,Lead,SOC,Philippines,161000.0,202000.0,Full time,Hybrid,5.0,Bachelor Degree
+10261,Senior,IT Audit,Philippines,70000.0,90000.0,Full time,Remote,4.0,Bachelor Degree
+10354,Middle,Python,Philippines,80000.0,120000.0,Full time,Remote,5.0,Bachelor Degree
+10384,Middle,Business Systems Analysis,Philippines,70000.0,100000.0,Full time,Hybrid,2.0,Bachelor Degree
+10476,Middle,Java,Philippines,90000.0,130000.0,Full time,Office,4.0,Bachelor Degree
+10534,Senior,Cybersecurity,Philippines,60000.0,80000.0,Full time,Hybrid,2.0,Bachelor Degree
+11148,Middle,Project Management,Philippines,60000.0,80000.0,Full time,Hybrid,3.0,Bachelor Degree
+11292,Middle,SAP,Philippines,70000.0,95000.0,Full time,Hybrid,4.0,Bachelor Degree
+11330,Middle,Linux,Philippines,60000.0,80000.0,Full time,Remote,5.0,Bachelor Degree
+11339,Middle,Banking,Philippines,110000.0,130000.0,Full time,Hybrid,4.0,Bachelor Degree
+11356,Junior,Quality Assurance,Philippines,45000.0,65000.0,Full time,Remote,3.0,Bachelor Degree
+11643,Senior,Citrix,Philippines,60000.0,80000.0,Contract/Temp,Hybrid,4.0,Bachelor Degree
+11856,Junior,QA,Philippines,25000.0,25000.0,Full time,Office,1.0,Bachelor Degree
+11887,Middle,AWS,Philippines,30000.0,30000.0,Full time,Hybrid,2.0,Bachelor Degree
+12314,Senior,Information Technology,Philippines,80000.0,100000.0,Full time,Office,10.0,Bachelor Degree
+12580,Senior,Cybersecurity,Philippines,100000.0,145000.0,Full time,Remote,5.0,Bachelor Degree
+12674,Senior,Java,Philippines,59000.0,60000.0,Full time,Hybrid,5.0,Bachelor Degree
+12718,Senior,Full Stack,Philippines,85000.0,127500.0,Full time,Office,5.0,Bachelor Degree
+12742,Middle,Networks,Philippines,70000.0,90000.0,Full time,Remote,3.0,Bachelor Degree
+13182,Senior,SAP FICO,Philippines,90000.0,120000.0,Full time,Hybrid,8.0,Bachelor Degree
+13263,Middle,SharePoint,Philippines,40000.0,70000.0,Full time,Hybrid,2.0,Bachelor Degree
+13667,Senior,Linux,Philippines,123000.0,160000.0,Full time,Office,3.0,Bachelor Degree
+13669,Junior,PHP,Philippines,30000.0,40000.0,Full time,Office,1.0,Bachelor Degree
+13760,Junior,Programming,Philippines,15000.0,18000.0,Full time,Office,0.0,Bachelor Degree
+13838,Middle,SQL,Philippines,90000.0,130000.0,Full time,Remote,3.0,Bachelor Degree
+13935,Middle,IT Project Management,Philippines,110000.0,130000.0,Full time,Hybrid,3.0,Bachelor Degree
+14534,Middle,.NET,Philippines,80000.0,80000.0,Full time,Hybrid,2.0,Bachelor Degree
+14546,Senior,Cybersecurity,Philippines,80000.0,115000.0,Full time,Hybrid,5.0,Bachelor Degree
+14787,Junior,Software Development,Philippines,16000.0,22000.0,Full time,Office,1.0,Bachelor Degree
+14904,Middle,Data Modeling,Philippines,80000.0,90000.0,Full time,Hybrid,2.0,Bachelor Degree
+15311,Junior,C#,Philippines,35000.0,45000.0,Full time,Hybrid,1.0,Bachelor Degree
+15400,Lead,Salesforce,Philippines,85000.0,120000.0,Full time,Remote,5.0,Bachelor Degree
+15991,Middle,KYC,Philippines,45000.0,65000.0,Full time,Hybrid,5.0,Bachelor Degree
+16003,Senior,DevOps,Philippines,160000.0,220000.0,Full time,Remote,8.0,Bachelor Degree
+16633,Junior,Flutter,Philippines,15000.0,20000.0,Full time,Office,1.0,Bachelor Degree
+16653,Senior,Java,Philippines,80000.0,120000.0,Full time,Office,3.0,Bachelor Degree
+16687,Middle,SQL,Philippines,55000.0,55000.0,Full time,Hybrid,2.0,Bachelor Degree
+16817,Middle,Power BI,Philippines,60000.0,80000.0,Full time,Hybrid,4.0,Bachelor Degree
+17378,Junior,IT Operations,Philippines,105000.0,137000.0,Full time,Hybrid,1.0,Bachelor Degree
+17399,Middle,Learning and Development,Philippines,85000.0,125000.0,Full time,Hybrid,3.0,Bachelor Degree
+17620,Senior,Networks & Systems Administration,Philippines,80000.0,100000.0,Full time,Office,5.0,Bachelor Degree
+17622,Senior,IT Support,Philippines,70000.0,90000.0,Full time,Office,5.0,Bachelor Degree
+18165,Middle,Palo Alto,Philippines,90000.0,95000.0,Full time,Office,4.0,Bachelor Degree
+18248,Middle,RPA,Philippines,80000.0,105000.0,Full time,Office,3.0,Bachelor Degree
+18673,Senior,Data Analysis,Philippines,68000.0,75000.0,Full time,Hybrid,7.0,Bachelor Degree
+18730,Senior,IT Support,Philippines,30000.0,45000.0,Full time,Office,7.0,Bachelor Degree
+18849,Senior,C#,Philippines,120000.0,130000.0,Full time,Remote,7.0,Bachelor Degree
+18985,Senior,Project Management,Philippines,120000.0,170000.0,Full time,Hybrid,10.0,Bachelor Degree
+19428,Middle,Web Development,Philippines,80000.0,120000.0,Full time,Office,3.0,Bachelor Degree
+19459,Junior,Networks,Philippines,18000.0,20000.0,Full time,Office,3.0,Bachelor Degree
+19543,Junior,Testing,Philippines,30000.0,35000.0,Full time,Office,2.0,Bachelor Degree
+19771,Middle,NetSuite,Philippines,35000.0,42000.0,Full time,Hybrid,2.0,Bachelor Degree
+19788,Middle,Networks & Systems Administration,Philippines,30000.0,35000.0,Full time,Office,4.0,Bachelor Degree
+19987,Middle,Java,Philippines,75000.0,90000.0,Full time,Office,5.0,Bachelor Degree
+20296,Junior,PHP,Philippines,20000.0,30000.0,Full time,Office,1.0,Bachelor Degree
+20324,Senior,Okta,Philippines,130000.0,180000.0,Full time,Hybrid,5.0,Bachelor Degree
+20463,Senior,Wallix,Philippines,130000.0,150000.0,Full time,Hybrid,5.0,Bachelor Degree
+20519,Middle,Web Development,Philippines,40000.0,45000.0,Full time,Remote,3.0,Bachelor Degree
+20547,Middle,.NET,Philippines,50000.0,55000.0,Contract/Temp,Office,2.0,Bachelor Degree
+20802,Lead,COBOL,Philippines,100000.0,120000.0,Full time,Hybrid,2.0,Bachelor Degree
+20953,Senior,SAP Ariba,Philippines,69000.0,100000.0,Full time,Remote,7.0,Bachelor Degree
+20969,Middle,ASP.Net MVC,Philippines,80000.0,100000.0,Contract/Temp,Office,2.0,Bachelor Degree
+20984,Middle,JAVA,Philippines,80000.0,100000.0,Full time,Hybrid,4.0,Bachelor Degree
+21108,Middle,IT Support,Philippines,80000.0,100000.0,Full time,Remote,4.0,Bachelor Degree
+21129,Senior,Python,Philippines,140000.0,170000.0,Full time,Hybrid,3.0,Bachelor Degree
+21168,Middle,Business Analysis,Philippines,80000.0,120000.0,Full time,Hybrid,3.0,Bachelor Degree
+21230,Middle,JavaScript,Philippines,90000.0,130000.0,Full time,Office,3.0,Bachelor Degree
+21236,Middle,Workforce Optimization,Philippines,27000.0,28000.0,Full time,Office,1.0,Bachelor Degree
+21250,Middle,Python,Philippines,130000.0,140000.0,Full time,Hybrid,3.0,Bachelor Degree
+21547,Middle,Networks,Philippines,35000.0,50000.0,Full time,Office,2.0,Bachelor Degree
+21549,Senior,DevOps,Philippines,100000.0,150000.0,Full time,Remote,10.0,Bachelor Degree
+21724,Middle,Business Intelligence,Philippines,45000.0,65000.0,Full time,Hybrid,3.0,Bachelor Degree
+21832,Senior,MS SQL Server,Philippines,35000.0,40000.0,Full time,Office,4.0,Bachelor Degree
+22259,Middle,.NET,Philippines,60000.0,70000.0,Full time,Hybrid,3.0,Bachelor Degree
+22362,Middle,Data Migration,Philippines,40000.0,50000.0,Full time,Remote,2.0,Bachelor Degree
+22543,Middle,Infrastructure Engineering,Philippines,30000.0,45000.0,Full time,Office,5.0,Bachelor Degree
+22816,Senior,Data Engineering,Philippines,75000.0,75000.0,Full time,Hybrid,4.0,Bachelor Degree
+22942,Junior,Audio Engineering,Philippines,26667.0,40000.0,Full time,Hybrid,1.0,Bachelor Degree
+23049,Middle,Networks & Systems Administration,Philippines,70000.0,80000.0,Full time,Hybrid,4.0,Bachelor Degree
+23204,Middle,.NET,Philippines,50000.0,50000.0,Full time,Office,2.0,Bachelor Degree
+23241,Middle,Front End Development,Philippines,39000.0,39500.0,Full time,Office,3.0,Bachelor Degree
+23329,Senior,Mainframe,Philippines,90000.0,125000.0,Full time,Hybrid,2.0,Bachelor Degree
+23367,Middle,Springboot,Philippines,60000.0,70000.0,Full time,Hybrid,3.0,Bachelor Degree
+23413,Middle,Business Analysis,Philippines,30000.0,75000.0,Full time,Office,3.0,Bachelor Degree
+23437,Middle,PHP,Philippines,35000.0,50000.0,Full time,Hybrid,2.0,Bachelor Degree
+23537,Middle,Ruby on Rails,Philippines,40000.0,60000.0,Full time,Remote,2.0,Bachelor Degree
+23616,Middle,Technical Writing,Philippines,45000.0,55000.0,Full time,Hybrid,2.0,Bachelor Degree
+23722,Senior,Java,Philippines,50000.0,60000.0,Full time,Office,2.0,Bachelor Degree
+24113,Middle,.NET,Philippines,100000.0,130000.0,Full time,Hybrid,5.0,Bachelor Degree
+24287,Middle,DevOps,Philippines,120000.0,140000.0,Full time,Hybrid,5.0,Bachelor Degree
+24339,Middle,SQL Server,Philippines,90000.0,120000.0,Full time,Hybrid,3.0,Bachelor Degree
+24435,Middle,JavaScript,Philippines,50000.0,100000.0,Full time,Remote,4.0,Bachelor Degree
+24789,Middle,Python,Philippines,170000.0,200000.0,Full time,Remote,5.0,Bachelor Degree
+24856,Middle,.NET,Philippines,40000.0,60000.0,Full time,Hybrid,2.0,Bachelor Degree
+24863,Junior,Network Engineering,Philippines,28000.0,42000.0,Full time,Hybrid,1.0,Bachelor Degree
+25164,Junior,Web Development,Philippines,35000.0,45000.0,Full time,Hybrid,2.0,Bachelor Degree
+25345,Middle,Python,Philippines,60000.0,70000.0,Full time,Hybrid,3.0,Bachelor Degree
+25478,Middle,Alteryx,Philippines,60000.0,80000.0,Full time,Hybrid,2.0,Bachelor Degree
+25634,Middle,Service Delivery,Philippines,30000.0,50000.0,Full time,Remote,3.0,Bachelor Degree
+25816,Senior,Microsoft Azure,Philippines,130000.0,190000.0,Full time,Remote,5.0,Bachelor Degree
+25844,Junior,PHP,Philippines,15000.0,20000.0,Full time,Office,2.0,Bachelor Degree
+25981,Middle,Ariba,Philippines,40000.0,50000.0,Full time,Hybrid,2.0,Bachelor Degree
+26199,Senior,Cloud Infrastructure,Philippines,35000.0,50000.0,Full time,Hybrid,3.0,Bachelor Degree
+26206,Senior,Angular,Philippines,45000.0,50000.0,Full time,Office,5.0,Bachelor Degree
+26223,Senior,Product Management,Philippines,80000.0,120000.0,Full time,Remote,10.0,Bachelor Degree
+26364,Middle,5G,Philippines,60000.0,85000.0,Full time,Office,5.0,Bachelor Degree
+26443,Middle,Microsoft Azure,Philippines,150000.0,190000.0,Full time,Remote,3.0,Bachelor Degree
+26463,Middle,Full Stack,Philippines,100000.0,110000.0,Full time,Hybrid,5.0,Bachelor Degree
+26472,Lead,NodeJS,Philippines,150000.0,200000.0,Full time,Remote,3.0,Bachelor Degree
+26575,Senior,Python,Philippines,155000.0,190000.0,Full time,Remote,3.0,Bachelor Degree
+26654,Junior,Audio Engineer,Philippines,25000.0,40000.0,Full time,Hybrid,1.0,Bachelor Degree
+26781,Middle,Site Reliability Engineering,Philippines,60000.0,75000.0,Full time,Hybrid,5.0,Bachelor Degree
+26791,Senior,DevOps,Philippines,100000.0,120000.0,Full time,Hybrid,2.0,Bachelor Degree
+26917,Junior,IT Support,Philippines,18000.0,20000.0,Full time,Office,0.0,Bachelor Degree
+27747,Middle,Java,Philippines,70000.0,105000.0,Full time,Hybrid,3.0,Bachelor Degree
+27788,Lead,C#,Philippines,145000.0,160000.0,Full time,Remote,5.0,Bachelor Degree
+28131,Lead,Linux,Philippines,120000.0,150000.0,Full time,Hybrid,7.0,Bachelor Degree
+28165,Middle,Data Quality,Philippines,100000.0,160000.0,Full time,Office,5.0,Bachelor Degree
+28567,Senior,C#,Philippines,80000.0,120000.0,Full time,Office,5.0,Bachelor Degree
+28658,Middle,Reporting,Philippines,50000.0,60000.0,Full time,Hybrid,2.0,Bachelor Degree
+29082,Middle,Python,Philippines,100000.0,150000.0,Full time,Remote,4.0,Bachelor Degree
+29161,Senior,Salesforce,Philippines,113000.0,150000.0,Full time,Remote,8.0,Bachelor Degree
+29773,Middle,AWS,Philippines,115000.0,170000.0,Full time,Hybrid,5.0,Bachelor Degree
+30037,Lead,Testing & Quality Assurance,Philippines,30000.0,35000.0,Full time,Office,4.0,Bachelor Degree
+30188,Middle,Cloud,Philippines,80000.0,85000.0,Full time,Remote,3.0,Bachelor Degree
+30282,Middle,Technical Writing,Philippines,30000.0,45000.0,Full time,Office,4.0,Bachelor Degree
+30327,Senior,Testing,Philippines,80000.0,90000.0,Contract/Temp,Remote,5.0,Bachelor Degree
+30429,Middle,Security,Philippines,60000.0,60000.0,Full time,Office,5.0,Bachelor Degree
+30440,Senior,Business Analytics,Philippines,39000.0,60000.0,Full time,Office,7.0,Bachelor Degree
+30465,Junior,PHP,Philippines,24000.0,36000.0,Full time,Hybrid,1.0,Bachelor Degree
+30473,Middle,Linux,Philippines,60000.0,80000.0,Contract/Temp,Hybrid,5.0,Bachelor Degree
+30542,Middle,.NET,Philippines,60000.0,90000.0,Full time,Remote,3.0,Bachelor Degree
+30560,Middle,HL7,Philippines,80000.0,90000.0,Full time,Remote,4.0,Bachelor Degree
+30576,Senior,Network Engineering,Philippines,60000.0,80000.0,Contract/Temp,Hybrid,4.0,Bachelor Degree
+30600,Middle,.NET,Philippines,90000.0,130000.0,Full time,Hybrid,2.0,Bachelor Degree
+30707,Senior,.NET,Philippines,115000.0,135000.0,Full time,Hybrid,3.0,Bachelor Degree
+30756,Middle,React,Philippines,20000.0,40000.0,Full time,Remote,2.0,Bachelor Degree
+30826,Middle,Networks & Systems Administration,Philippines,40000.0,50000.0,Full time,Hybrid,1.0,Bachelor Degree
+30987,Senior,Data Privacy,Philippines,65000.0,95000.0,Full time,Hybrid,4.0,Bachelor Degree
+31031,Middle,Data Center,Philippines,45000.0,60000.0,Full time,Remote,3.0,Bachelor Degree
+31074,Senior,Cloud,Philippines,40000.0,70000.0,Full time,Hybrid,3.0,Bachelor Degree
+31364,Middle,IT,Philippines,30000.0,45000.0,Full time,Hybrid,1.0,Bachelor Degree
+31553,Middle,MySQL,Philippines,45000.0,75000.0,Full time,Hybrid,4.0,Bachelor Degree
+31725,Junior,Cybersecurity,Philippines,40000.0,50000.0,Full time,Remote,1.0,Bachelor Degree
+31961,Senior,Project Management,Philippines,200000.0,250000.0,Full time,Hybrid,10.0,Bachelor Degree
+32085,Senior,Machine Learning,Philippines,135000.0,150000.0,Full time,Office,5.0,Bachelor Degree
+32326,Middle,IT Support,Philippines,40000.0,45000.0,Full time,Remote,2.0,Bachelor Degree
+32336,Senior,Full Stack Development,Philippines,60000.0,80000.0,Full time,Hybrid,5.0,Bachelor Degree
+32344,Junior,Web Development,Philippines,30000.0,40000.0,Full time,Hybrid,1.0,Bachelor Degree
+32365,Middle,Web Design,Philippines,18000.0,20000.0,Full time,Office,1.0,Bachelor Degree
+32416,Middle,Web Development,Philippines,30000.0,40000.0,Full time,Hybrid,3.0,Bachelor Degree
+32608,Middle,AWS,Philippines,120000.0,150000.0,Full time,Remote,5.0,Bachelor Degree
+20020,Middle,Web Development,Philippines,35000.0,50000.0,Full time,Office,2.0,Bachelor Degree
+18626,Middle,Salesforce,Philippines,90000.0,120000.0,Full time,Hybrid,3.0,Bachelor Degree
+7507,Middle,WordPress,Philippines,50000.0,60000.0,Full time,Remote,5.0,Bachelor Degree
+28027,Middle,VB.Net,Philippines,27000.0,40000.0,Full time,Hybrid,2.0,Bachelor Degree
+22928,Senior,.NET,Philippines,115000.0,130000.0,Full time,Remote,5.0,Bachelor Degree
+17663,Senior,Workday,Philippines,140000.0,160000.0,Full time,Remote,5.0,Bachelor Degree
+19727,Senior,Game Development,Philippines,60000.0,80000.0,Full time,Hybrid,2.0,Bachelor Degree
+9953,Senior,Laravel,Philippines,150000.0,150000.0,Full time,Remote,6.0,Bachelor Degree
+12105,Senior,Front-End,Philippines,120000.0,130000.0,Full time,Remote,5.0,Bachelor Degree
+29112,Senior,Project Management,Philippines,140000.0,200000.0,Full time,Hybrid,4.0,Bachelor Degree
+12573,Lead,SAP Enable Now,Philippines,50000.0,70000.0,Full time,Hybrid,2.0,Bachelor Degree
+12848,Senior,ServiceNow,Philippines,80000.0,120000.0,Full time,Hybrid,4.0,Bachelor Degree
+648,Junior,Testing,Philippines,25000.0,35000.0,Full time,Remote,1.0,Bachelor Degree
+4348,Junior,IT Support,Philippines,17000.0,18000.0,Full time,Office,1.0,Bachelor Degree
+17690,Middle,Java,Philippines,40000.0,60000.0,Full time,Office,3.0,Bachelor Degree
+17750,Junior,Marketing,Philippines,15680.0,18000.0,Full time,Office,1.0,Bachelor Degree
+20146,Middle,Web Development,Philippines,23000.0,25000.0,Full time,Hybrid,2.0,Bachelor Degree
+28479,Middle,.NET,Philippines,90000.0,140000.0,Full time,Hybrid,5.0,Bachelor Degree
+30414,Senior,IT,Philippines,39000.0,60000.0,Full time,Office,7.0,Bachelor Degree
+30759,Junior,IT Support,Philippines,40000.0,60000.0,Casual/Vacation,Office,1.0,Bachelor Degree
+26138,Middle,.NET,Philippines,80000.0,100000.0,Full time,Remote,3.0,Bachelor Degree
+27318,Middle,.NET,Philippines,60000.0,90000.0,Full time,Remote,3.0,Bachelor Degree
+8470,Middle,ITIL,Philippines,70000.0,100000.0,Full time,Hybrid,3.0,Bachelor Degree
+9875,Middle,Tableau,Philippines,50000.0,60000.0,Full time,Hybrid,3.0,Bachelor Degree
+12751,Middle,Networks & Systems Administration,Philippines,40000.0,50000.0,Full time,Remote,4.0,Bachelor Degree
+12961,Junior,Unity,Philippines,27000.0,27000.0,Full time,Hybrid,1.0,Bachelor Degree
+13343,Junior,IT Support,Philippines,16000.0,20000.0,Full time,Office,1.0,Bachelor Degree
+17000,Senior,C#,Philippines,60000.0,90000.0,Full time,Remote,7.0,Bachelor Degree
+19150,Senior,IT,Philippines,220000.0,270000.0,Full time,Office,10.0,Bachelor Degree
+24107,Middle,Software Testing,Philippines,40000.0,50000.0,Full time,Remote,2.0,Bachelor Degree
+24616,Junior,SAP ABAP,Philippines,40000.0,60000.0,Full time,Remote,1.0,Bachelor Degree
+25115,Middle,Mobile,Philippines,33000.0,35000.0,Full time,Office,2.0,Bachelor Degree
+30762,Middle,Node.js,Philippines,20000.0,40000.0,Full time,Remote,2.0,Bachelor Degree
+31477,Senior,ITIL,Philippines,30000.0,45000.0,Full time,Office,5.0,Bachelor Degree
+7386,Senior,Database Administration,Philippines,90000.0,100000.0,Full time,Hybrid,5.0,Bachelor Degree
+13556,Lead,Salesforce,Philippines,200000.0,250000.0,Full time,Remote,5.0,Bachelor Degree
+17618,Middle,Azure,Philippines,108000.0,140000.0,Full time,Hybrid,4.0,Bachelor Degree
+28413,Middle,Azure,Philippines,108000.0,140000.0,Full time,Hybrid,4.0,Bachelor Degree
+28808,Senior,Oracle,Philippines,80000.0,100000.0,Full time,Hybrid,7.0,Bachelor Degree
+16713,Middle,Flutter,Philippines,90000.0,100000.0,Full time,Hybrid,2.0,Bachelor Degree
+32744,Middle,AS400,Philippines,80000.0,120000.0,Full time,Office,5.0,Bachelor Degree
+30515,Middle,Systems Engineering,Philippines,70000.0,105000.0,Full time,Remote,3.0,Bachelor Degree
+18442,Middle,Analytics,Philippines,30000.0,32000.0,Full time,Office,1.0,College Degree
+13682,Middle,Angular JS,Philippines,90000.0,120000.0,Full time,Hybrid,3.0,College Degree
+13813,Middle,Java,Philippines,120000.0,150000.0,Full time,Hybrid,2.0,College Degree
+14826,Middle,Testing & Quality Assurance,Philippines,30000.0,35000.0,Full time,Office,1.0,College Degree
+16549,Junior,Customer Experience,Philippines,29000.0,30500.0,Full time,Remote,0.0,College Degree
+30230,Junior,IT Support,Philippines,18000.0,20000.0,Full time,Office,0.0,College Degree
+16636,Middle,IT Support,Philippines,40000.0,45000.0,Full time,Hybrid,0.0,College Degree
+7177,Middle,Java,Philippines,25000.0,32000.0,Full time,Office,2.0,Degree (Any)
+5547,Middle,Customer Support,Philippines,30000.0,40000.0,Full time,Hybrid,5.0,Degree (Any)
+27248,Junior,IT Support,Philippines,18000.0,23000.0,Full time,Office,1.0,Diploma
+22473,Junior,MS Visual Basic.Net,Philippines,18000.0,25000.0,Full time,Office,1.0,Diploma
+1532,Junior,Customer Service,Philippines,25650.0,28650.0,Full time,Office,1.0,Diploma
+4497,Junior,Customer Support,Philippines,35000.0,50000.0,Full time,Office,0.0,Diploma
+4846,Junior,IT Support,Philippines,23000.0,23000.0,Full time,Office,1.0,Diploma
+5532,Junior,Call Center,Philippines,35000.0,50000.0,Full time,Office,0.0,Diploma
+5548,Junior,Compliance,Philippines,50000.0,60000.0,Full time,Hybrid,1.0,Diploma
+7447,Junior,IT Support,Philippines,35000.0,50000.0,Full time,Office,0.0,Diploma
+10325,Middle,Technical Support,Philippines,20000.0,25000.0,Full time,Office,1.0,Diploma
+20508,Junior,Customer Service,Philippines,35000.0,50000.0,Full time,Office,0.0,Diploma
+27082,Senior,Business Intelligence,Philippines,75000.0,110000.0,Full time,Remote,4.0,Master's Degree
+28130,Middle,ICT Support,Philippines,113333.0,170000.0,Full time,Hybrid,3.0,Unspecified
+3743,Middle,Power BI,Philippines,120000.0,140000.0,Full time,Hybrid,3.0,Unspecified
+3169,Junior,Technical Support,Philippines,25000.0,25400.0,Full time,Office,1.0,Unspecified
+16053,Middle,Microsoft,Philippines,48000.0,72000.0,Full time,Office,3.0,Unspecified
+19739,Junior,Customer Service,Philippines,23000.0,26000.0,Full time,Office,0.0,Unspecified
+889,Middle,IT Service Management,Philippines,55000.0,80000.0,Full time,Hybrid,4.0,Bachelor Degree
+18420,Middle,Access Management,Philippines,50000.0,70000.0,Contract/Temp,Hybrid,3.0,Bachelor Degree
+4720,Middle,Application Security,Philippines,40000.0,60000.0,Full time,Hybrid,3.0,Bachelor Degree
+22641,Middle,IAM,Philippines,0.0,90000.0,Full time,Hybrid,3.0,Bachelor Degree
+32751,Senior,Insurance,Philippines,120000.0,140000.0,Full time,Office,7.0,Bachelor Degree
+172,Middle,GoLang,Philippines,0.0,120000.0,Full time,Hybrid,5.0,Unspecified
+197,Middle,Operations Management,Philippines,70000.0,90000.0,Full time,Remote,6.0,Unspecified
+212,Middle,Automation Testing,Philippines,90000.0,130000.0,Full time,Remote,5.0,Unspecified
+534,Senior,C++,Philippines,60000.0,90000.0,Full time,Office,1.0,Unspecified
+623,Middle,NetSuite,Philippines,40000.0,50000.0,Full time,Hybrid,2.0,Unspecified
+925,Middle,Workday,Philippines,70000.0,100000.0,Full time,Hybrid,3.0,Unspecified
+956,Middle,GoLang,Philippines,100000.0,180000.0,Full time,Hybrid,4.0,Unspecified
+1053,Middle,Data Analytics,Philippines,40000.0,50000.0,Full time,Hybrid,2.0,Unspecified
+1459,Senior,PHP,Philippines,100000.0,120000.0,Full time,Hybrid,4.0,Unspecified
+1475,Senior,AWS,Philippines,120000.0,160000.0,Full time,Office,6.0,Unspecified
+1607,Senior,C#,Philippines,120000.0,180000.0,Full time,Remote,6.0,Unspecified
+1617,Senior,AR/VR,Philippines,100000.0,120000.0,Full time,Remote,5.0,Unspecified
+1831,Junior,Microsoft 365,Philippines,80000.0,100000.0,Full time,Office,1.0,Unspecified
+2128,Senior,Azure DevOps,Philippines,130000.0,170000.0,Full time,Hybrid,7.0,Unspecified
+2569,Senior,Solutions Architecture,Philippines,150000.0,180000.0,Full time,Hybrid,15.0,Unspecified
+2808,Senior,Citrix,Philippines,80000.0,120000.0,Full time,Remote,10.0,Unspecified
+2829,Middle,IT Support,Philippines,45000.0,55000.0,Full time,Remote,2.0,Unspecified
+2851,Middle,Digital Solution Support,Philippines,58000.0,62000.0,Full time,Hybrid,3.0,Unspecified
+3113,Middle,C/C++,Philippines,60000.0,90000.0,Full time,Hybrid,2.0,Unspecified
+3466,Senior,Java,Philippines,130000.0,180000.0,Full time,Remote,5.0,Unspecified
+3471,Senior,Front End Development,Philippines,80000.0,110000.0,Full time,Hybrid,5.0,Unspecified
+3548,Middle,Project Management,Philippines,100000.0,110000.0,Full time,Remote,3.0,Unspecified
+4092,Middle,Ansible,Philippines,150000.0,200000.0,Full time,Remote,3.0,Unspecified
+4098,Senior,Automation Testing,Philippines,37000.0,55000.0,Full time,Office,5.0,Unspecified
+4505,Middle,SaaS,Philippines,45000.0,55000.0,Full time,Remote,3.0,Unspecified
+4591,Middle,ReactJS,Philippines,90000.0,120000.0,Full time,Remote,5.0,Unspecified
+4648,Senior,Adobe Experience Manager/AEM,Philippines,115000.0,170000.0,Full time,Hybrid,3.0,Unspecified
+4793,Middle,Networks,Philippines,35000.0,40000.0,Full time,Office,3.0,Unspecified
+4946,Middle,Java,Philippines,100000.0,150000.0,Contract/Temp,Hybrid,4.0,Unspecified
+5268,Senior,Automation Testing,Philippines,100000.0,150000.0,Full time,Hybrid,5.0,Unspecified
+5512,Middle,Project Management,Philippines,30000.0,45000.0,Full time,Hybrid,3.0,Unspecified
+5636,Middle,Java,Philippines,80000.0,90000.0,Full time,Hybrid,2.0,Unspecified
+5639,Middle,.NET,Philippines,40000.0,40000.0,Full time,Hybrid,2.0,Unspecified
+5695,Middle,Product Management,Philippines,60000.0,85000.0,Full time,Hybrid,2.0,Unspecified
+6126,Senior,QA & Testing,Philippines,70000.0,100000.0,Full time,Remote,5.0,Unspecified
+6146,Senior,COBOL Mainframe,Philippines,100000.0,150000.0,Full time,Hybrid,4.0,Unspecified
+6189,Middle,React,Philippines,50000.0,75000.0,Full time,Remote,2.0,Unspecified
+6201,Middle,RPA,Philippines,75000.0,80000.0,Full time,Hybrid,5.0,Unspecified
+6318,Senior,Java,Philippines,100000.0,150000.0,Full time,Hybrid,7.0,Unspecified
+6622,Middle,TOSCA Automation,Philippines,80000.0,110000.0,Contract/Temp,Hybrid,2.0,Unspecified
+6870,Middle,Full Stack,Philippines,100000.0,145000.0,Full time,Remote,5.0,Unspecified
+6879,Middle,PHP,Philippines,120000.0,143000.0,Full time,Remote,5.0,Unspecified
+7000,Senior,Analytics,Philippines,80000.0,130000.0,Full time,Remote,5.0,Unspecified
+7055,Middle,SQL,Philippines,70000.0,70000.0,Full time,Hybrid,5.0,Unspecified
+7252,Middle,Systems Administration,Philippines,50000.0,70000.0,Full time,Remote,5.0,Unspecified
+8043,Middle,Help Desk & IT Support,Philippines,100000.0,100000.0,Full time,Office,1.0,Unspecified
+8187,Middle,Project Management,Philippines,40000.0,45000.0,Full time,Hybrid,2.0,Unspecified
+8273,Senior,Node JS,Philippines,140000.0,165000.0,Full time,Remote,5.0,Unspecified
+8326,Senior,Mulesoft,Philippines,180000.0,200000.0,Full time,Office,8.0,Unspecified
+8639,Middle,PHP Laravel,Philippines,25000.0,30000.0,Full time,Office,2.0,Unspecified
+8645,Middle,AWS,Philippines,45000.0,80000.0,Full time,Office,2.0,Unspecified
+8770,Middle,Testing,Philippines,40000.0,60000.0,Full time,Hybrid,3.0,Unspecified
+9117,Middle,Salesforce,Philippines,130000.0,180000.0,Full time,Remote,5.0,Unspecified
+9238,Senior,Java,Philippines,167000.0,250000.0,Full time,Office,10.0,Unspecified
+9553,Middle,Laravel,Philippines,100000.0,140000.0,Full time,Office,2.0,Unspecified
+9692,Middle,E-Learning,Philippines,45000.0,60000.0,Full time,Hybrid,2.0,Unspecified
+9714,Middle,ERP,Philippines,40000.0,55000.0,Full time,Remote,3.0,Unspecified
+9903,Middle,Project Management,Philippines,65000.0,80000.0,Full time,Remote,3.0,Unspecified
+9957,Middle,Php,Philippines,80000.0,90000.0,Full time,Office,3.0,Unspecified
+10343,Middle,C#,Philippines,750.0,1500.0,Full time,Remote,2.0,Unspecified
+10411,Middle,Backend Development,Philippines,0.0,110000.0,Full time,Hybrid,2.0,Unspecified
+10576,Senior,Information Architecture,Philippines,120000.0,180000.0,Full time,Remote,3.0,Unspecified
+10619,Middle,Networks,Philippines,100000.0,140000.0,Full time,Office,3.0,Unspecified
+10667,Middle,WordPress,Philippines,50000.0,65000.0,Full time,Office,3.0,Unspecified
+10680,Middle,Software Licensing,Philippines,50000.0,100000.0,Full time,Remote,5.0,Unspecified
+10708,Middle,IT Support,Philippines,60000.0,90000.0,Full time,Office,2.0,Unspecified
+10922,Senior,Microsoft 365,Philippines,120000.0,140000.0,Full time,Remote,3.0,Unspecified
+10993,Junior,Python,Philippines,4.0,5.0,Full time,Remote,1.0,Unspecified
+11149,Senior,Cocos Creator,Philippines,60000.0,85000.0,Full time,Office,3.0,Unspecified
+11435,Lead,Java,Philippines,85000.0,90000.0,Full time,Hybrid,7.0,Unspecified
+11492,Middle,Drupal,Philippines,75000.0,80000.0,Full time,Hybrid,3.0,Unspecified
+11561,Senior,Java,Philippines,170000.0,200000.0,Full time,Remote,5.0,Unspecified
+11730,Middle,BigQuery,Philippines,80000.0,100000.0,Full time,Remote,3.0,Unspecified
+11835,Middle,Java,Philippines,60000.0,150000.0,Full time,Hybrid,1.0,Unspecified
+12005,Senior,Web Development,Philippines,100000.0,150000.0,Full time,Remote,5.0,Unspecified
+12008,Middle,IT Support,Philippines,40000.0,45000.0,Full time,Remote,3.0,Unspecified
+12043,Senior,Python,Philippines,100000.0,150000.0,Full time,Hybrid,5.0,Unspecified
+12110,Middle,Java,Philippines,100000.0,150000.0,Full time,Remote,4.0,Unspecified
+12238,Senior,Cloud,Philippines,170000.0,250000.0,Full time,Hybrid,3.0,Unspecified
+12898,Middle,Netsuite,Philippines,50000.0,75000.0,Full time,Remote,2.0,Unspecified
+13078,Middle,Node.JS,Philippines,90000.0,110000.0,Full time,Hybrid,2.0,Unspecified
+13208,Senior,Cyber Security,Philippines,150000.0,180000.0,Full time,Hybrid,5.0,Unspecified
+13211,Senior,Frontend Development,Philippines,120000.0,130000.0,Full time,Remote,5.0,Unspecified
+13271,Middle,Cyber Security,Philippines,70000.0,85000.0,Full time,Hybrid,3.0,Unspecified
+13336,Senior,Systems Engineer,Philippines,85000.0,120000.0,Full time,Office,2.0,Unspecified
+13427,Senior,M365,Philippines,120000.0,140000.0,Full time,Remote,3.0,Unspecified
+13463,Middle,Project Management,Philippines,40000.0,45000.0,Contract/Temp,Hybrid,3.0,Unspecified
+14100,Middle,Java,Philippines,90000.0,110000.0,Full time,Hybrid,2.0,Unspecified
+14319,Middle,Shopify,Philippines,50000.0,65000.0,Full time,Office,2.0,Unspecified
+14603,Middle,Mainframe,Philippines,50000.0,50000.0,Full time,Hybrid,2.0,Unspecified
+14642,Senior,3D,Philippines,50000.0,70000.0,Full time,Office,6.0,Unspecified
+15000,Middle,DevOps,Philippines,90000.0,110000.0,Full time,Remote,2.0,Unspecified
+15366,Senior,Project Management,Philippines,60000.0,80000.0,Full time,Hybrid,3.0,Unspecified
+15385,Senior,Cloud,Philippines,170000.0,250000.0,Full time,Hybrid,3.0,Unspecified
+15433,Senior,Networks,Philippines,170000.0,250000.0,Full time,Hybrid,5.0,Unspecified
+15465,Middle,Data Analysis,Philippines,5.0,8.0,Full time,Remote,2.0,Unspecified
+15735,Middle,AWS,Philippines,170000.0,200000.0,Full time,Remote,5.0,Unspecified
+15999,Middle,Cloud,Philippines,150000.0,180000.0,Full time,Remote,3.0,Unspecified
+16058,Middle,POS,Philippines,40000.0,44000.0,Full time,Office,3.0,Unspecified
+16141,Senior,MS SQL,Philippines,70000.0,75000.0,Full time,Hybrid,5.0,Unspecified
+16236,Senior,AWS,Philippines,100000.0,150000.0,Full time,Remote,5.0,Unspecified
+16297,Middle,Salesforce,Philippines,60000.0,70000.0,Full time,Remote,4.0,Unspecified
+16340,Middle,Drupal,Philippines,65000.0,65000.0,Full time,Hybrid,2.0,Unspecified
+16358,Middle,Technical SEO,Philippines,43000.0,48000.0,Full time,Office,5.0,Unspecified
+16513,Middle,eCommerce,Philippines,58000.0,62000.0,Full time,Hybrid,3.0,Unspecified
+16526,Middle,Health Insurance System,Philippines,30000.0,45000.0,Full time,Hybrid,2.0,Unspecified
+16541,Senior,Business Intelligence,Philippines,90000.0,115000.0,Full time,Hybrid,4.0,Unspecified
+16668,Senior,PHP,Philippines,40000.0,50000.0,Full time,Remote,2.0,Unspecified
+16729,Middle,C++,Philippines,60000.0,80000.0,Full time,Office,1.0,Unspecified
+16747,Middle,.NET,Philippines,80000.0,110000.0,Full time,Remote,5.0,Unspecified
+17311,Middle,Web Development,Philippines,50000.0,60000.0,Full time,Remote,3.0,Unspecified
+17360,Middle,Javascript,Philippines,100000.0,130000.0,Full time,Office,3.0,Unspecified
+17581,Middle,Java,Philippines,75000.0,85000.0,Contract/Temp,Office,2.0,Unspecified
+17728,Senior,Java,Philippines,100000.0,150000.0,Full time,Office,5.0,Unspecified
+17837,Lead,SAP,Philippines,100000.0,150000.0,Full time,Remote,5.0,Unspecified
+17857,Middle,Testing,Philippines,50000.0,60000.0,Full time,Remote,2.0,Unspecified
+17905,Senior,C#,Philippines,120000.0,180000.0,Full time,Remote,6.0,Unspecified
+18555,Lead,Salesforce,Philippines,80000.0,120000.0,Full time,Hybrid,5.0,Unspecified
+18772,Middle,Flutter,Philippines,40000.0,40000.0,Full time,Hybrid,2.0,Unspecified
+18873,Middle,UiPath,Philippines,100000.0,110000.0,Full time,Office,2.0,Unspecified
+18918,Middle,Automation Testing,Philippines,110000.0,110000.0,Full time,Hybrid,1.0,Unspecified
+19466,Middle,Flutter,Philippines,80000.0,120000.0,Full time,Hybrid,4.0,Unspecified
+19562,Middle,Full Stack,Philippines,78000.0,88000.0,Full time,Remote,4.0,Unspecified
+19802,Senior,HubSpot,Philippines,85000.0,95000.0,Full time,Remote,4.0,Unspecified
+19860,Senior,Python,Philippines,80000.0,90000.0,Full time,Remote,4.0,Unspecified
+20248,Middle,Product Management,Philippines,60000.0,80000.0,Full time,Hybrid,1.0,Unspecified
+20363,Middle,IT Product,Philippines,30000.0,45000.0,Full time,Hybrid,2.0,Unspecified
+20634,Middle,.NET,Philippines,70000.0,78000.0,Full time,Hybrid,2.0,Unspecified
+20925,Junior,Microsoft Office Tools,Philippines,20000.0,20000.0,Full time,Office,1.0,Unspecified
+20946,Middle,Oracle PL/SQL,Philippines,40000.0,40000.0,Full time,Hybrid,2.0,Unspecified
+20982,Senior,QA,Philippines,55000.0,75000.0,Full time,Hybrid,4.0,Unspecified
+20985,Middle,Drupal,Philippines,100000.0,120000.0,Full time,Hybrid,3.0,Unspecified
+21199,Middle,.NET,Philippines,40000.0,55000.0,Contract/Temp,Office,2.0,Unspecified
+21360,Middle,PHP,Philippines,75000.0,75000.0,Full time,Hybrid,2.0,Unspecified
+21462,Junior,HelpDesk,Philippines,25000.0,30000.0,Full time,Hybrid,1.0,Unspecified
+22196,Middle,Autosys,Philippines,75000.0,80000.0,Full time,Hybrid,3.0,Unspecified
+22357,Senior,Oracle Data Integrator,Philippines,160000.0,200000.0,Full time,Hybrid,7.0,Unspecified
+22577,Senior,Cloud Network Engineering,Philippines,70000.0,80000.0,Full time,Hybrid,4.0,Unspecified
+22788,Middle,Node JS,Philippines,30000.0,35000.0,Full time,Hybrid,2.0,Unspecified
+22910,Senior,Azure,Philippines,140000.0,180000.0,Full time,Office,15.0,Unspecified
+23331,Lead,COBOL,Philippines,100000.0,195000.0,Contract/Temp,Hybrid,4.0,Unspecified
+23337,Senior,Salesforce,Philippines,66000.0,150000.0,Full time,Remote,4.0,Unspecified
+23340,Lead,Java,Philippines,150000.0,250000.0,Full time,Office,8.0,Unspecified
+23344,Middle,Salesforce,Philippines,150000.0,250000.0,Full time,Office,4.0,Unspecified
+23345,Senior,Power BI,Philippines,60500.0,117500.0,Full time,Hybrid,4.0,Unspecified
+23373,Senior,Avaloq,Philippines,200000.0,250000.0,Full time,Office,5.0,Unspecified
+23422,Middle,Power BI,Philippines,29800.0,47800.0,Full time,Remote,4.0,Unspecified
+23606,Middle,RPG,Philippines,50000.0,100000.0,Contract/Temp,Hybrid,4.0,Unspecified
+23671,Middle,Data Analysis,Philippines,60000.0,100000.0,Full time,Remote,4.0,Unspecified
+23866,Middle,Full Stack,Philippines,80000.0,100000.0,Contract/Temp,Remote,5.0,Unspecified
+24432,Middle,Linux/Windows,Philippines,70000.0,90000.0,Full time,Remote,5.0,Unspecified
+24505,Middle,Spring Boot,Philippines,65000.0,140000.0,Casual/Vacation,Hybrid,2.0,Unspecified
+24524,Senior,Salesforce,Philippines,90000.0,110000.0,Full time,Remote,5.0,Unspecified
+24531,Lead,Information Security,Philippines,140000.0,140000.0,Full time,Hybrid,2.0,Unspecified
+24977,Middle,Business Analysis,Philippines,40000.0,50000.0,Full time,Hybrid,2.0,Unspecified
+25103,Senior,Cobol,Philippines,70000.0,90000.0,Full time,Hybrid,1.0,Unspecified
+25123,Lead,COBOL,Philippines,80000.0,90000.0,Full time,Hybrid,2.0,Unspecified
+25129,Middle,Web Application Firewalls,Philippines,100000.0,130000.0,Full time,Hybrid,1.0,Unspecified
+25177,Senior,Security Architecture,Philippines,150000.0,180000.0,Full time,Hybrid,8.0,Unspecified
+25200,Middle,SAP Security,Philippines,80000.0,100000.0,Full time,Hybrid,2.0,Unspecified
+25262,Senior,RPA,Philippines,42000.0,85000.0,Full time,Hybrid,8.0,Unspecified
+25513,Middle,Embedded Systems,Philippines,148000.0,370500.0,Full time,Office,2.0,Unspecified
+25564,Middle,Embedded Systems,Philippines,129000.0,222000.0,Full time,Office,2.0,Unspecified
+25577,Middle,Warehouse Management Systems,Philippines,50000.0,60000.0,Full time,Hybrid,2.0,Unspecified
+25622,Middle,Security,Philippines,70000.0,90000.0,Contract/Temp,Office,3.0,Unspecified
+25943,Middle,PeopleSoft,Philippines,120000.0,150000.0,Full time,Hybrid,3.0,Unspecified
+26098,Middle,SaaS,Philippines,50000.0,70000.0,Full time,Hybrid,2.0,Unspecified
+26238,Senior,SAP MDG,Philippines,70000.0,90000.0,Full time,Hybrid,3.0,Unspecified
+26505,Senior,AWS EC2,Philippines,120000.0,145000.0,Full time,Hybrid,4.0,Unspecified
+26569,Middle,Ansible,Philippines,120000.0,150000.0,Full time,Hybrid,3.0,Unspecified
+26666,Middle,Help Desk & IT Support,Philippines,40000.0,44000.0,Full time,Office,3.0,Unspecified
+26762,Senior,Linux,Philippines,100000.0,150000.0,Full time,Hybrid,7.0,Unspecified
+26830,Middle,SAP MM,Philippines,70000.0,95000.0,Full time,Hybrid,3.0,Unspecified
+26918,Middle,Big Data,Philippines,30000.0,40000.0,Full time,Hybrid,1.0,Unspecified
+26945,Middle,Project Management,Philippines,90000.0,110000.0,Full time,Remote,3.0,Unspecified
+26956,Middle,Big Data,Philippines,80000.0,100000.0,Full time,Hybrid,3.0,Unspecified
+27158,Middle,Management,Philippines,70000.0,90000.0,Full time,Remote,7.0,Unspecified
+27165,Middle,Testing & Quality Assurance,Philippines,50000.0,70000.0,Full time,Remote,4.0,Unspecified
+27187,Senior,Typescript,Philippines,170000.0,250000.0,Full time,Remote,5.0,Unspecified
+27583,Middle,Yii2,Philippines,150000.0,180000.0,Full time,Remote,5.0,Unspecified
+27638,Middle,ASP.NET,Philippines,70000.0,100000.0,Full time,Office,3.0,Unspecified
+27786,Senior,SAP HR,Philippines,70000.0,80000.0,Full time,Hybrid,5.0,Unspecified
+27956,Junior,Technical Support,Philippines,28000.0,35000.0,Full time,Office,1.0,Unspecified
+28112,Senior,Service Desk,Philippines,46000.0,65000.0,Full time,Office,3.0,Unspecified
+28242,Senior,IT Service Management,Philippines,58000.0,62000.0,Full time,Hybrid,3.0,Unspecified
+28334,Senior,Network Administration,Philippines,70000.0,75000.0,Full time,Hybrid,7.0,Unspecified
+28362,Senior,Data Science/Machine Learning,Philippines,80000.0,100000.0,Full time,Hybrid,3.0,Unspecified
+28414,Senior,AWS,Philippines,120000.0,180000.0,Full time,Remote,7.0,Unspecified
+28424,Senior,SAP FICO,Philippines,80000.0,100000.0,Full time,Hybrid,3.0,Unspecified
+28448,Middle,Cloud,Philippines,80000.0,100000.0,Full time,Hybrid,5.0,Unspecified
+28505,Middle,WordPress,Philippines,60000.0,80000.0,Full time,Office,3.0,Unspecified
+28508,Middle,Front-end,Philippines,10000000.0,15000000.0,Full time,Office,2.0,Unspecified
+28764,Middle,Java,Philippines,70000.0,80000.0,Full time,Remote,1.0,Unspecified
+28802,Senior,.NET,Philippines,110000.0,160000.0,Full time,Hybrid,8.0,Unspecified
+28886,Senior,.NET,Philippines,120000.0,160000.0,Full time,Hybrid,5.0,Unspecified
+28922,Middle,Data Analysis,Philippines,50000.0,65000.0,Full time,Office,2.0,Unspecified
+28937,Middle,Project Management,Philippines,90000.0,100000.0,Full time,Remote,5.0,Unspecified
+28988,Middle,Technical Support,Philippines,30000.0,35000.0,Full time,Office,3.0,Unspecified
+29864,Middle,NOC,Philippines,70000.0,90000.0,Full time,Remote,3.0,Unspecified
+30084,Senior,Microsoft,Philippines,165000.0,180000.0,Full time,Hybrid,5.0,Unspecified
+30102,Junior,Cloud,Philippines,30000.0,35000.0,Full time,Hybrid,1.0,Unspecified
+30311,Middle,React.js,Philippines,75000.0,80000.0,Full time,Hybrid,4.0,Unspecified
+30315,Middle,Node.js,Philippines,75000.0,80000.0,Full time,Hybrid,3.0,Unspecified
+30351,Senior,Azure AD,Philippines,75000.0,80000.0,Full time,Hybrid,7.0,Unspecified
+30674,Senior,Web Development,Philippines,80000.0,150000.0,Full time,Hybrid,7.0,Unspecified
+30709,Middle,PHP,Philippines,20000.0,40000.0,Full time,Remote,2.0,Unspecified
+30736,Middle,PHP,Philippines,40000.0,50000.0,Full time,Remote,2.0,Unspecified
+30758,Senior,Python,Philippines,20000.0,40000.0,Full time,Remote,5.0,Unspecified
+30766,Middle,Java,Philippines,30000.0,40000.0,Full time,Remote,2.0,Unspecified
+30787,Senior,.NET,Philippines,150000.0,200000.0,Full time,Hybrid,9.0,Unspecified
+30969,Middle,Sales Support,Philippines,65000.0,85000.0,Full time,Hybrid,2.0,Unspecified
+31095,Middle,IT Support,Philippines,50000.0,70000.0,Full time,Hybrid,2.0,Unspecified
+31431,Middle,Microsoft Active Directory,Philippines,70000.0,90000.0,Full time,Remote,3.0,Unspecified
+31487,Junior,.NET,Philippines,25000.0,55000.0,Contract/Temp,Office,1.0,Unspecified
+31552,Junior,ASP.NET,Philippines,22000.0,28000.0,Contract/Temp,Office,0.0,Unspecified
+31724,Middle,IT Support,Philippines,30000.0,35000.0,Contract/Temp,Hybrid,2.0,Unspecified
+31821,Middle,POS,Philippines,40000.0,44000.0,Full time,Office,3.0,Unspecified
+31852,Middle,SAP,Philippines,70000.0,90000.0,Full time,Office,3.0,Unspecified
+32420,Senior,Java,Philippines,75000.0,80000.0,Full time,Hybrid,5.0,Unspecified
+32424,Middle,Help Desk,Philippines,60000.0,67000.0,Full time,Hybrid,1.0,Unspecified
+32753,Middle,Oracle C2M,Philippines,150000.0,250000.0,Full time,Office,4.0,Unspecified
+32754,Senior,Salesforce,Philippines,150000.0,250000.0,Full time,Office,4.0,Unspecified
+32755,Senior,Guidewire,Philippines,150000.0,250000.0,Full time,Office,4.0,Unspecified
