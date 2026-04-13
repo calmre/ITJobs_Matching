@@ -135,21 +135,26 @@ def login_screen():
                     st.error(st.session_state.login_error)
 
                 if st.button("Log in", use_container_width=True):
-                    data, code = _api_call(
-                        "POST", "/auth/login",
-                        json={"username": username, "password": password}
-                    )
+                    with st.spinner("Logging in..."):
+                        data, code = _api_call(
+                            "POST", "/auth/login",
+                            json={"username": username, "password": password}
+                        )
 
-                    if code == 200:
-                        # Store the JWT token — this is what future requests use
-                        st.session_state.jwt_token = data["token"]
-                        st.session_state.role = data["role"]
-                        st.session_state.username = data["username"]
-                        st.session_state.login_error = ""
-                        st.rerun()
-                    else:
-                        st.session_state.login_error = data.get("error", "Login failed.")
-                        st.rerun()
+                        if code == 200:
+                            # Store the JWT token — this is what future requests use
+                            st.session_state.jwt_token = data["token"]
+                            st.session_state.role = data["role"]
+                            st.session_state.username = data["username"]
+                            st.session_state.login_error = ""
+                            if data.get("role") == "admin":
+                                st.success("Logged in successfully as admin. Redirecting...")
+                            else:
+                                st.success("Logged in successfully. Redirecting...")
+                            st.rerun()
+                        else:
+                            st.session_state.login_error = data.get("error", "Login failed. Please check your username and password.")
+                            st.rerun()
 
             # ── REGISTER TAB ──────────────────────────────────────────────────
             with tab_register:

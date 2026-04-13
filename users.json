@@ -1,1 +1,14 @@
-{"admin": "$2b$12$kpfPX8DsKINFIGB5nEkrkOla0Kkr9mdzm1Pk1WN4bWThps9EA640O", "sean": "$2b$12$BairY7Pqr8y98m0SyGnd.elGJccxgCmgdykNd1lj2UQvG96iJc192"}
+{
+  "admin": {
+    "password": "$2b$12$kpfPX8DsKINFIGB5nEkrkOla0Kkr9mdzm1Pk1WN4bWThps9EA640O",
+    "role": "admin"
+  },
+  "sean": {
+    "password": "$2b$12$BairY7Pqr8y98m0SyGnd.elGJccxgCmgdykNd1lj2UQvG96iJc192",
+    "role": "admin"
+  },
+  "sean123": {
+    "password": "$2b$12$uG2w.sI6DpM52Pcc/b/tk.7OWlfr8J6GRWqtrFzQSvUQnG5c3IRXS",
+    "role": "admin"
+  }
+}

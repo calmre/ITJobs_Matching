@@ -82,9 +82,13 @@ with col_toggle:
 with col_role:
     st.write("")
     if role == "admin":
-        st.success("👑 Admin")
+        full_name = st.session_state.get("username", "Admin")
+        st.success(f" {full_name}")
+    elif role == "user":
+        full_name = st.session_state.get("username", "User")
+        st.info(f" {full_name}")
     else:
-        st.info("👤 Guest")
+        st.info(" Guest")
 
 with col_logout:
     st.write("")
@@ -142,9 +146,9 @@ filtered_df = filtered_df[
 ]
 
 # ── Tabs ───────────────────────────────────────────────────────────────────────
-tab_labels = ["📊 Dashboard", "🎯 Job Matcher", "🤖 AI Chatbot"]
+tab_labels = [" Dashboard", " Job Matcher", "AI Chatbot"]
 if role == "admin":
-    tab_labels.append("🔧 Admin Panel")
+    tab_labels.append(" Admin Panel")
 
 tabs = st.tabs(tab_labels)
 tab_dashboard = tabs[0]
