@@ -443,22 +443,23 @@ with tab_matcher:
     st.subheader("Job Matcher")
     st.caption("Rank jobs based on your profile.")
 
+    st.markdown("**1. Upload your CV/Resume (Optional)**")
+    uploaded_cv = st.file_uploader("Upload PDF, DOCX or TXT", type=["pdf", "docx", "txt"])
+    has_cv = uploaded_cv is not None
+
     with st.form("matcher_form"):
-        st.markdown("**1. Upload your CV/Resume (Optional)**")
-        uploaded_cv = st.file_uploader("Upload PDF, DOCX or TXT", type=["pdf", "docx", "txt"])
         st.markdown("**2. Or enter details manually**")
         
         col1, col2 = st.columns(2)
         with col1:
-            user_skills   = st.text_input("Skills / keywords", placeholder="e.g. Python, data analysis, SQL")
-            user_level    = st.selectbox("Your experience level", options=["Any"] + all_levels)
-            user_mode     = st.selectbox("Preferred work mode", options=["Any"] + all_modes)
-            user_type     = st.selectbox("Job type preference", options=["Any"] + all_types)
+            user_skills   = st.text_input("Skills / keywords", placeholder="e.g. Python, data analysis, SQL", disabled=has_cv)
+            user_level    = st.selectbox("Your experience level", options=["Any"] + all_levels, disabled=has_cv)
+            user_mode     = st.selectbox("Preferred work mode", options=["Any"] + all_modes, disabled=has_cv)
+            user_type     = st.selectbox("Job type preference", options=["Any"] + all_types, disabled=has_cv)
         with col2:
-            user_exp        = st.slider("Years of experience", min_value=0.0, max_value=15.0, value=3.0, step=0.5, format="%.1f yrs")
-            user_salary_min = st.number_input("Min salary (PHP/month)", min_value=0, max_value=500_000, value=40_000, step=5_000)
-            user_salary_max = st.number_input("Max salary (PHP/month)", min_value=0, max_value=500_000, value=120_000, step=5_000)
-            top_n           = st.slider("Number of results", min_value=3, max_value=20, value=8)
+            user_exp        = st.slider("Years of experience", min_value=0.0, max_value=15.0, value=3.0, step=0.5, format="%.1f yrs", disabled=has_cv)
+            user_salary_min = st.number_input("Min salary (PHP/month)", min_value=0, max_value=500_000, value=40_000, step=5_000, disabled=has_cv)
+            user_salary_max = st.number_input("Max salary (PHP/month)", min_value=0, max_value=500_000, value=120_000, step=5_000, disabled=has_cv)
 
         submitted = st.form_submit_button("Find Matches", use_container_width=True)
 
@@ -467,28 +468,47 @@ with tab_matcher:
         cv_text = ""
         if uploaded_cv is not None:
             cv_text = extract_cv_text(uploaded_cv)
+            with st.expander("🛠️ Debug: Extracted CV Text", expanded=False):
+                st.text(cv_text)
             
         # Combine user skills and CV text for the final query
-        combined_skills = f"{user_skills} {cv_text}".strip()
+        combined_skills = cv_text if has_cv else user_skills.strip()
         
-        level_filter = [] if user_level == "Any" else [user_level]
-        mode_filter  = [] if user_mode  == "Any" else [user_mode]
-        type_filter  = [] if user_type  == "Any" else [user_type]
+        level_filter = [] if (user_level == "Any" or has_cv) else [user_level]
+        mode_filter  = [] if (user_mode  == "Any" or has_cv) else [user_mode]
+        type_filter  = [] if (user_type  == "Any" or has_cv) else [user_type]
+        
+        # Override experience and salary for pure CV search
+        search_exp = 3.0 if has_cv else user_exp
+        search_sal_min = 0 if has_cv else user_salary_min
+        search_sal_max = 500_000 if has_cv else user_salary_max
 
         with st.spinner("Running matching engine..."):
             results = match_jobs(df=df, skill_query=combined_skills, level=level_filter, mode=mode_filter,
-                                 job_type=type_filter, exp_years=user_exp,
-                                 salary_min=user_salary_min, salary_max=user_salary_max, top_n=top_n)
+                                 job_type=type_filter, exp_years=search_exp,
+                                 salary_min=search_sal_min, salary_max=search_sal_max, top_n=len(df))
+                                 
+        # --- Strict Filtering ---
+        # 1. If terms were specified, the skill score MUST be greater than 2.0 (ensuring at least some direct overlap)
+        if combined_skills:
+            results = results[results["skill_score"] > 2.0]
+            
+        # 2. Cut off completely irrelevant matches that are riding on free points from "Any" salary/exp filters
+        results = results[results["match_pct"] >= 45]
 
         if results.empty:
-            st.warning("No jobs matched. Try adjusting your filters.")
+            st.warning("No jobs matched enough criteria. Try adding more skills or lowering your constraints.")
         else:
             st.success(f"Successfully matched {len(results)} jobs.")
 
-            st.markdown("**Match Score Breakdown**")
+            # Top N results for charts to avoid clutter
+            chart_n = min(15, len(results))
+            results_chart = results.head(chart_n).copy()
+
+            st.markdown(f"**Match Score Breakdown (Top {chart_n})**")
             fig_scores = px.bar(
-                results, x="match_pct",
-                y=results.index.astype(str) + ". " + results["tech_specialisation"] + " (" + results["level"] + ")",
+                results_chart, x="match_pct",
+                y=results_chart.index.astype(str) + ". " + results_chart["tech_specialisation"] + " (" + results_chart["level"] + ")",
                 orientation="h", color="match_pct",
                 color_continuous_scale=["#f87171", "#fbbf24", "#34d399"], range_color=[0, 100],
                 labels={"match_pct": "Match %", "y": ""}, text="match_pct"
@@ -496,11 +516,11 @@ with tab_matcher:
             fig_scores.update_traces(texttemplate="%{text}%", textposition="outside")
             fig_scores.update_layout(coloraxis_showscale=False, yaxis=dict(autorange="reversed"),
                                       xaxis=dict(range=[0, 115]), margin=dict(t=20, b=20, l=10, r=10),
-                                      height=max(300, len(results) * 42))
+                                      height=max(300, len(results_chart) * 42))
             st.plotly_chart(fig_scores, use_container_width=True)
 
-            st.markdown("**Score Analysis**")
-            results_long = results.copy()
+            st.markdown(f"**Score Analysis (Top {chart_n})**")
+            results_long = results_chart.copy()
             results_long["label"] = results_long["tech_specialisation"] + " (" + results_long["level"] + ")"
             fig_stacked = go.Figure()
             fig_stacked.add_trace(go.Bar(name="Skill match (max 55)", y=results_long["label"], x=results_long["skill_score"].round(1), orientation="h", marker_color="#3b82f6"))
@@ -509,7 +529,7 @@ with tab_matcher:
             fig_stacked.add_trace(go.Bar(name="Cluster boost (max 5)", y=results_long["label"], x=results_long["cluster_boost"].round(1), orientation="h", marker_color="#8b5cf6"))
             fig_stacked.update_layout(barmode="stack", legend=dict(orientation="h", yanchor="bottom", y=1.02),
                                        yaxis=dict(autorange="reversed"), xaxis=dict(title="Score breakdown", range=[0, 100]),
-                                       margin=dict(t=60, b=20, l=10, r=10), height=max(300, len(results) * 42))
+                                       margin=dict(t=60, b=20, l=10, r=10), height=max(300, len(results_chart) * 42))
             st.plotly_chart(fig_stacked, use_container_width=True)
 
             st.markdown("**Matched Job Listings**")
