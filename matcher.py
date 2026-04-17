@@ -2,6 +2,18 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import linkage, fcluster
+from scipy.spatial.distance import pdist
+
+
+# ── Cluster labels (human-readable names derived from top TF-IDF terms) ───────
+# We assign names after fitting so the dashboard can display them meaningfully.
+_CLUSTER_NAMES = {}   # populated by build_clusters()
+_KMEANS_MODEL  = None # cached so match_jobs can reuse it
+_TFIDF_MODEL   = None # shared vectoriser for consistency
 
 
 def load_data(path: str) -> pd.DataFrame:
@@ -33,6 +45,124 @@ def load_data(path: str) -> pd.DataFrame:
     return df
 
 
+def build_clusters(df: pd.DataFrame, n_clusters: int = 8) -> pd.DataFrame:
+    """
+    Cluster all jobs using two techniques and return an enriched DataFrame.
+
+    ── K-Means clustering ────────────────────────────────────────────────────
+    K-Means partitions jobs into K groups by minimising intra-cluster variance.
+    Each job is assigned to the nearest centroid in TF-IDF vector space.
+    We also mix in normalised salary and experience so clusters reflect both
+    skills AND seniority/pay band — not just text similarity.
+
+    Feature matrix per job:
+      - TF-IDF vector of tech_specialisation  (text → skill fingerprint)
+      - normalised salary_mid                 (pay band signal)
+      - normalised work_experience_years      (seniority signal)
+
+    ── Hierarchical clustering ───────────────────────────────────────────────
+    Ward linkage builds a bottom-up tree: start with every job as its own
+    cluster, then repeatedly merge the pair whose merge increases total
+    within-cluster variance the least.  We cut the tree at n_clusters to get
+    flat labels, but the full linkage matrix is returned for the dendrogram.
+
+    ── PCA projection ────────────────────────────────────────────────────────
+    We reduce the high-dimensional TF-IDF matrix to 2D with PCA so we can
+    plot every job as a dot on a scatter chart.
+
+    Returns
+    -------
+    df_out : DataFrame — original df + columns:
+        kmeans_cluster      int   cluster id (0-based)
+        kmeans_label        str   human-readable cluster name
+        hier_cluster        int   hierarchical cluster id
+        pca_x, pca_y        float 2-D coordinates for scatter plot
+    linkage_matrix          stored as df_out.attrs["linkage_matrix"]
+    cluster_names           stored as df_out.attrs["cluster_names"]
+    """
+    global _CLUSTER_NAMES, _KMEANS_MODEL, _TFIDF_MODEL
+
+    df_out = df.copy().reset_index(drop=True)
+
+    # ── 1. TF-IDF on specialisation text ─────────────────────────────────────
+    _TFIDF_MODEL = TfidfVectorizer(
+        ngram_range=(1, 2),
+        stop_words="english",
+        min_df=2,          # ignore terms appearing in only 1 job
+        max_features=300,  # cap vocabulary for speed
+    )
+    tfidf_matrix = _TFIDF_MODEL.fit_transform(df_out["tech_specialisation"]).toarray()
+
+    # ── 2. Numeric features (salary + experience) ────────────────────────────
+    scaler = StandardScaler()
+    numeric_cols = df_out[["salary_mid", "work_experience_years"]].fillna(
+        df_out[["salary_mid", "work_experience_years"]].median()
+    )
+    numeric_scaled = scaler.fit_transform(numeric_cols)
+
+    # Weight numeric features — give text 80% of the signal, numeric 20%
+    feature_matrix = np.hstack([tfidf_matrix * 0.8, numeric_scaled * 0.2])
+
+    # ── 3. K-Means ────────────────────────────────────────────────────────────
+    _KMEANS_MODEL = KMeans(
+        n_clusters=n_clusters,
+        random_state=42,
+        n_init=10,          # run 10 times, keep best inertia
+        max_iter=300,
+    )
+    kmeans_labels = _KMEANS_MODEL.fit_predict(feature_matrix)
+    df_out["kmeans_cluster"] = kmeans_labels
+
+    # Name each cluster by its top-3 TF-IDF terms at the centroid
+    feature_names = _TFIDF_MODEL.get_feature_names_out()
+    cluster_names = {}
+    for cid in range(n_clusters):
+        # centroid in TF-IDF space (first len(feature_names) dims)
+        centroid = _KMEANS_MODEL.cluster_centers_[cid, : len(feature_names)]
+        top_idx  = centroid.argsort()[::-1][:3]
+        top_terms = [feature_names[i].title() for i in top_idx]
+        cluster_names[cid] = " / ".join(top_terms)
+
+    _CLUSTER_NAMES = cluster_names
+    df_out["kmeans_label"] = df_out["kmeans_cluster"].map(cluster_names)
+
+    # ── 4. Hierarchical clustering (Ward linkage) ─────────────────────────────
+    # pdist on the full feature matrix, then Ward linkage
+    dist_matrix   = pdist(feature_matrix, metric="euclidean")
+    link_matrix   = linkage(dist_matrix, method="ward")
+    hier_labels   = fcluster(link_matrix, t=n_clusters, criterion="maxclust")
+    df_out["hier_cluster"] = hier_labels
+
+    # ── 5. PCA → 2D for scatter plot ──────────────────────────────────────────
+    pca = PCA(n_components=2, random_state=42)
+    coords = pca.fit_transform(feature_matrix)
+    df_out["pca_x"] = coords[:, 0]
+    df_out["pca_y"] = coords[:, 1]
+
+    # Stash linkage matrix and names in DataFrame attrs for the dashboard
+    df_out.attrs["linkage_matrix"] = link_matrix
+    df_out.attrs["cluster_names"]  = cluster_names
+
+    return df_out
+
+
+def get_cluster_for_query(skill_query: str, n_clusters: int = 8) -> int | None:
+    """
+    Given a free-text skill query, predict which K-Means cluster it belongs to.
+    Returns None if the model hasn't been built yet.
+    """
+    if _KMEANS_MODEL is None or _TFIDF_MODEL is None:
+        return None
+    try:
+        vec = _TFIDF_MODEL.transform([skill_query]).toarray()
+        # Pad with zeros for the numeric dims (salary/exp unknown for query)
+        numeric_zeros = np.zeros((1, 2))
+        feature_vec   = np.hstack([vec * 0.8, numeric_zeros * 0.2])
+        return int(_KMEANS_MODEL.predict(feature_vec)[0])
+    except Exception:
+        return None
+
+
 def match_jobs(
     df: pd.DataFrame,
     skill_query: str,
@@ -45,7 +175,7 @@ def match_jobs(
     top_n: int = 10,
 ) -> pd.DataFrame:
     """
-    Two-stage matching:
+    Three-stage matching:
 
     Stage 1 — Hard filters
       Remove any job that fails a non-negotiable constraint.
@@ -53,9 +183,15 @@ def match_jobs(
 
     Stage 2 — Soft scoring
       Score each surviving job 0–100 based on:
-        - TF-IDF cosine similarity on tech_specialisation (up to 60 pts)
+        - TF-IDF cosine similarity on tech_specialisation (up to 55 pts)
         - Salary fit: does the job's mid-point land in the user's range? (up to 25 pts)
         - Experience proximity: how close is the job's required exp to the user's? (up to 15 pts)
+
+    Stage 3 — Cluster boost (up to 5 pts)
+      If the K-Means model has been built (via build_clusters), predict which
+      cluster the user's query belongs to.  Jobs in the same cluster get a
+      small bonus — this rewards specialisation-level similarity beyond
+      what raw TF-IDF cosine captures.
 
     We then sort by score descending and return the top N.
     """
@@ -63,20 +199,13 @@ def match_jobs(
     candidates = df.copy()
 
     # ── Stage 1: Hard filters ──────────────────────────────────────────────────
-    # Each filter only activates when the user made a selection (non-empty list).
-    # "Any" = empty list = no filter applied.
-
     if level:
         candidates = candidates[candidates["level"].isin(level)]
-
     if mode:
         candidates = candidates[candidates["mode"].isin(mode)]
-
     if job_type:
         candidates = candidates[candidates["type"].isin(job_type)]
 
-    # Salary hard filter: only show jobs where salary_mid is within user range.
-    # We use salary_mid (the midpoint) as the representative salary for a listing.
     candidates = candidates[
         (candidates["salary_mid"] >= salary_min) &
         (candidates["salary_mid"] <= salary_max)
@@ -87,42 +216,24 @@ def match_jobs(
 
     # ── Stage 2: Soft scoring ──────────────────────────────────────────────────
 
-    # --- 2a. TF-IDF cosine similarity (0–60 pts) ---
-    # TF-IDF turns text into a vector of word importance weights.
-    # "TF" = how often a word appears in this document.
-    # "IDF" = how rare the word is across all documents (rare words = more signal).
-    # Cosine similarity measures the angle between two vectors — 1.0 = identical, 0.0 = nothing in common.
-    #
-    # We fit the vectoriser on all job specialisations, then transform both
-    # the job corpus and the user's query into the same vector space.
-
+    # --- 2a. TF-IDF cosine similarity (0–55 pts) ---
+    # Slightly reduced from 60 to make room for the cluster boost (5 pts).
     if skill_query.strip():
         vectorizer = TfidfVectorizer(
-            ngram_range=(1, 2),   # unigrams + bigrams: "full stack" counts as one feature
-            stop_words="english", # remove common words like "and", "the"
-            min_df=1,             # include even rare terms (small dataset)
+            ngram_range=(1, 2),
+            stop_words="english",
+            min_df=1,
         )
-
-        # Fit on all job specialisations (so IDF weights are consistent)
-        job_vectors = vectorizer.fit_transform(candidates["tech_specialisation"])
-
-        # Transform the user's query into the same space
-        query_vector = vectorizer.transform([skill_query])
-
-        # Cosine similarity returns a (1 × n_jobs) matrix — flatten to 1D
+        job_vectors   = vectorizer.fit_transform(candidates["tech_specialisation"])
+        query_vector  = vectorizer.transform([skill_query])
         similarity_scores = cosine_similarity(query_vector, job_vectors).flatten()
-
-        # Scale to 0–60 pts
         candidates = candidates.copy()
-        candidates["skill_score"] = similarity_scores * 60
+        candidates["skill_score"] = similarity_scores * 55
     else:
-        # No skill query → all jobs get equal skill score
         candidates = candidates.copy()
-        candidates["skill_score"] = 30.0  # neutral middle score
+        candidates["skill_score"] = 27.5  # neutral middle score
 
     # --- 2b. Salary fit score (0–25 pts) ---
-    # Full 25 pts if job mid is inside user range.
-    # Partial credit if it's close (within 20% outside the range).
     def salary_score(mid):
         if salary_min <= mid <= salary_max:
             return 25.0
@@ -136,32 +247,43 @@ def match_jobs(
     candidates["salary_score"] = candidates["salary_mid"].apply(salary_score)
 
     # --- 2c. Experience proximity score (0–15 pts) ---
-    # Perfect score if required exp == user's exp.
-    # Loses 3 pts per year of difference, floored at 0.
     def exp_score(req_exp):
         if pd.isna(req_exp):
-            return 7.5  # neutral if unspecified
+            return 7.5
         diff = abs(req_exp - exp_years)
         return max(0.0, 15.0 - diff * 3.0)
 
     candidates["exp_score"] = candidates["work_experience_years"].apply(exp_score)
 
+    # ── Stage 3: Cluster boost (0–5 pts) ──────────────────────────────────────
+    # Predict which K-Means cluster the user's query falls into.
+    # Jobs already in that cluster get +5 pts — they're in the same
+    # "neighbourhood" of the job market as what the user described.
+    user_cluster = get_cluster_for_query(skill_query) if skill_query.strip() else None
+
+    if user_cluster is not None and "kmeans_cluster" in candidates.columns:
+        candidates["cluster_boost"] = candidates["kmeans_cluster"].apply(
+            lambda c: 5.0 if c == user_cluster else 0.0
+        )
+    else:
+        candidates["cluster_boost"] = 0.0
+
     # ── Final score ───────────────────────────────────────────────────────────
     candidates["match_score"] = (
         candidates["skill_score"] +
         candidates["salary_score"] +
-        candidates["exp_score"]
+        candidates["exp_score"] +
+        candidates["cluster_boost"]
     ).round(1)
 
-    # Normalise to 0–100 range (max possible = 60+25+15 = 100)
+    # Max possible = 55 + 25 + 15 + 5 = 100
     candidates["match_pct"] = candidates["match_score"].clip(upper=100).astype(int)
 
-    # Sort by score and return top N
     result = candidates.sort_values("match_pct", ascending=False).head(top_n)
 
     return result[[
         "jobid", "tech_specialisation", "level", "mode", "type",
         "salary_from", "salary_to", "salary_mid",
         "work_experience_years", "education_level",
-        "match_pct", "skill_score", "salary_score", "exp_score"
+        "match_pct", "skill_score", "salary_score", "exp_score", "cluster_boost"
     ]].reset_index(drop=True)

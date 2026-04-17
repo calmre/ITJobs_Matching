@@ -6,7 +6,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from matcher import load_data, match_jobs
+from matcher import load_data, match_jobs, build_clusters
 from auth import require_auth, logout
 from chatbot import render_chat
 
@@ -69,7 +69,18 @@ st.markdown(f"""
 def get_data():
     return load_data("itjob_header_cleaned.csv")
 
+@st.cache_data
+def get_clustered_data():
+    """
+    Build K-Means + hierarchical clusters once and cache the result.
+    This also trains the global _KMEANS_MODEL used by match_jobs() for the
+    cluster boost — so we call it at startup, not lazily.
+    """
+    raw = load_data("itjob_header_cleaned.csv")
+    return build_clusters(raw, n_clusters=8)
+
 df = get_data()
+clustered_df = get_clustered_data()  # trains models as a side-effect
 
 # ── Header ────────────────────────────────────────────────────────────────────
 col_title, col_toggle, col_role, col_logout = st.columns([5, 1, 1, 1])
@@ -245,6 +256,163 @@ with tab_dashboard:
             use_container_width=True, hide_index=True
         )
 
+    # ── Clustering section ────────────────────────────────────────────────────
+    st.divider()
+    st.subheader("Job Market Clusters")
+    st.caption(
+        "Jobs grouped by skill similarity, salary band, and experience level using "
+        "K-Means (8 clusters) and Hierarchical (Ward linkage) clustering."
+    )
+
+    cluster_tab1, cluster_tab2 = st.tabs(["K-Means Clusters", "Hierarchical Clusters"])
+
+    with cluster_tab1:
+        st.markdown("**K-Means cluster map** — each dot is a job, coloured by cluster")
+        st.caption(
+            "Axes are PCA components (compressed from ~300 TF-IDF dimensions to 2D). "
+            "Cluster names are the top TF-IDF terms at each centroid."
+        )
+
+        # Merge cluster info onto filtered_df using index alignment
+        plot_df = filtered_df.copy()
+        plot_df = plot_df.merge(
+            clustered_df[["jobid", "kmeans_cluster", "kmeans_label", "pca_x", "pca_y"]],
+            on="jobid", how="left"
+        ).dropna(subset=["pca_x", "pca_y"])
+
+        if not plot_df.empty:
+            fig_scatter = px.scatter(
+                plot_df,
+                x="pca_x", y="pca_y",
+                color="kmeans_label",
+                hover_data={
+                    "tech_specialisation": True,
+                    "level": True,
+                    "salary_mid": ":,.0f",
+                    "pca_x": False,
+                    "pca_y": False,
+                },
+                labels={"pca_x": "PCA Component 1", "pca_y": "PCA Component 2", "kmeans_label": "Cluster"},
+                color_discrete_sequence=px.colors.qualitative.Bold,
+                opacity=0.75,
+            )
+            fig_scatter.update_traces(marker=dict(size=6))
+            fig_scatter.update_layout(
+                legend=dict(orientation="v", x=1.01, y=1),
+                margin=dict(t=20, b=20, l=10, r=10),
+                height=500,
+            )
+            st.plotly_chart(fig_scatter, use_container_width=True)
+
+            # Cluster summary table
+            st.markdown("**Cluster summary**")
+            cluster_summary = (
+                plot_df.groupby("kmeans_label")
+                .agg(
+                    Jobs=("jobid", "count"),
+                    Median_Salary=("salary_mid", "median"),
+                    Avg_Exp=("work_experience_years", "mean"),
+                )
+                .rename(columns={"Median_Salary": "Median Salary (PHP)", "Avg_Exp": "Avg Exp (yrs)"})
+                .sort_values("Jobs", ascending=False)
+                .reset_index()
+                .rename(columns={"kmeans_label": "Cluster"})
+            )
+            cluster_summary["Median Salary (PHP)"] = cluster_summary["Median Salary (PHP)"].map("PHP {:,.0f}".format)
+            cluster_summary["Avg Exp (yrs)"] = cluster_summary["Avg Exp (yrs)"].map("{:.1f}".format)
+            st.dataframe(cluster_summary, use_container_width=True, hide_index=True)
+        else:
+            st.info("No cluster data available for the current filter selection.")
+
+    with cluster_tab2:
+        st.markdown("**Hierarchical cluster map** — same PCA layout, coloured by Ward linkage cluster")
+        st.caption(
+            "Ward linkage merges the pair of clusters that minimises the increase in total "
+            "within-cluster variance at each step. Cut at 8 clusters."
+        )
+
+        plot_df2 = filtered_df.copy()
+        plot_df2 = plot_df2.merge(
+            clustered_df[["jobid", "hier_cluster", "pca_x", "pca_y"]],
+            on="jobid", how="left"
+        ).dropna(subset=["pca_x", "pca_y"])
+
+        if not plot_df2.empty:
+            plot_df2["hier_cluster"] = "Cluster " + plot_df2["hier_cluster"].astype(int).astype(str)
+
+            fig_hier = px.scatter(
+                plot_df2,
+                x="pca_x", y="pca_y",
+                color="hier_cluster",
+                hover_data={
+                    "tech_specialisation": True,
+                    "level": True,
+                    "salary_mid": ":,.0f",
+                    "pca_x": False,
+                    "pca_y": False,
+                },
+                labels={"pca_x": "PCA Component 1", "pca_y": "PCA Component 2", "hier_cluster": "Hier. Cluster"},
+                color_discrete_sequence=px.colors.qualitative.Pastel,
+                opacity=0.75,
+            )
+            fig_hier.update_traces(marker=dict(size=6))
+            fig_hier.update_layout(
+                legend=dict(orientation="v", x=1.01, y=1),
+                margin=dict(t=20, b=20, l=10, r=10),
+                height=500,
+            )
+            st.plotly_chart(fig_hier, use_container_width=True)
+
+            # Dendrogram (sampled — full 525-node dendrogram is unreadable)
+            st.markdown("**Dendrogram** — top 30 merges (Ward linkage)")
+            st.caption(
+                "Each horizontal line is a merge event. Height = distance cost of that merge. "
+                "Taller bars = more dissimilar groups being joined."
+            )
+
+            link_matrix = clustered_df.attrs.get("linkage_matrix")
+            if link_matrix is not None:
+                import plotly.figure_factory as ff
+                # Show only the last 30 merges (top of the tree) to keep it readable
+                n = len(link_matrix)
+                last_n = 30
+                truncated = link_matrix[n - last_n:]
+
+                # Re-label leaf nodes as integers for ff.create_dendrogram compatibility
+                labels = [str(i) for i in range(last_n + 1)]
+                try:
+                    fig_dendro = ff.create_dendrogram(
+                        truncated[:, :2],   # only the merge-pair columns
+                        orientation="bottom",
+                        labels=labels,
+                        color_threshold=truncated[:, 2].mean(),
+                    )
+                    fig_dendro.update_layout(
+                        xaxis=dict(showticklabels=False),
+                        yaxis=dict(title="Merge distance (Ward)"),
+                        margin=dict(t=20, b=20, l=40, r=10),
+                        height=350,
+                    )
+                    st.plotly_chart(fig_dendro, use_container_width=True)
+                except Exception:
+                    # Fallback: bar chart of merge distances (always works)
+                    merge_distances = link_matrix[n - last_n:, 2]
+                    fig_bar = px.bar(
+                        x=list(range(1, last_n + 1)),
+                        y=merge_distances,
+                        labels={"x": "Merge step (last 30)", "y": "Ward distance"},
+                        color=merge_distances,
+                        color_continuous_scale="Blues",
+                    )
+                    fig_bar.update_layout(
+                        coloraxis_showscale=False,
+                        margin=dict(t=20, b=20, l=10, r=10),
+                        height=300,
+                    )
+                    st.plotly_chart(fig_bar, use_container_width=True)
+        else:
+            st.info("No cluster data available for the current filter selection.")
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  TAB 2 — JOB MATCHER
@@ -301,9 +469,10 @@ with tab_matcher:
             results_long = results.copy()
             results_long["label"] = results_long["tech_specialisation"] + " (" + results_long["level"] + ")"
             fig_stacked = go.Figure()
-            fig_stacked.add_trace(go.Bar(name="Skill match (max 60)", y=results_long["label"], x=results_long["skill_score"].round(1), orientation="h", marker_color="#3b82f6"))
+            fig_stacked.add_trace(go.Bar(name="Skill match (max 55)", y=results_long["label"], x=results_long["skill_score"].round(1), orientation="h", marker_color="#3b82f6"))
             fig_stacked.add_trace(go.Bar(name="Salary fit (max 25)",  y=results_long["label"], x=results_long["salary_score"].round(1), orientation="h", marker_color="#10b981"))
             fig_stacked.add_trace(go.Bar(name="Experience fit (max 15)", y=results_long["label"], x=results_long["exp_score"].round(1), orientation="h", marker_color="#f59e0b"))
+            fig_stacked.add_trace(go.Bar(name="Cluster boost (max 5)", y=results_long["label"], x=results_long["cluster_boost"].round(1), orientation="h", marker_color="#8b5cf6"))
             fig_stacked.update_layout(barmode="stack", legend=dict(orientation="h", yanchor="bottom", y=1.02),
                                        yaxis=dict(autorange="reversed"), xaxis=dict(title="Score breakdown", range=[0, 100]),
                                        margin=dict(t=60, b=20, l=10, r=10), height=max(300, len(results) * 42))
@@ -331,7 +500,7 @@ with tab_matcher:
                 </div>""", unsafe_allow_html=True)
 
             st.divider()
-            csv_out = results.drop(columns=["skill_score", "salary_score", "exp_score"]).to_csv(index=False)
+            csv_out = results.drop(columns=["skill_score", "salary_score", "exp_score", "cluster_boost"], errors="ignore").to_csv(index=False)
             st.download_button("Download Results (CSV)", data=csv_out, file_name="matched_jobs.csv", mime="text/csv")
 
 
